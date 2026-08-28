@@ -22,11 +22,11 @@ reaproveita, não recria).
 
 ## Phase 2: Foundational
 
-- [ ] T002 Implementar `VariacaoService` (união discriminada `calculada | indisponivel`) em
+- [x] T002 Implementar `VariacaoService` (união discriminada `calculada | indisponivel`) em
       `apps/api/src/domain/indicador/variacao-service.ts`
-- [ ] T003 [P] Implementar `IndicadorRepository` (leitura de `indicador` + últimas 2 observações
+- [x] T003 [P] Implementar `IndicadorRepository` (leitura de `indicador` + últimas 2 observações
       por indicador) em `apps/api/src/infrastructure/persistence/postgres/indicador-repository.ts`
-- [ ] T004 [P] Definir DTO `DashboardItem` compartilhado em
+- [x] T004 [P] Definir DTO `DashboardItem` compartilhado em
       `packages/shared-types/src/dashboard.ts` (contrato HTTP entre API e web)
 
 **Checkpoint**: `VariacaoService` e repositório prontos — reaproveitados por US1 e por
