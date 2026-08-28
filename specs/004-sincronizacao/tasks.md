@@ -94,8 +94,8 @@ permanece servido e `JobExecucao` registra a falha.
 
 ## Phase 6: Polish
 
-- [ ] T022 Documentar política de sincronização (frequência, mecanismo, proteção do endpoint) no `readme.md` raiz (seção exigida pelo readme seção 6)
-- [ ] T023 Rodar `quickstart.md` manualmente e confirmar os 3 cenários de validação
+- [x] T022 Documentar política de sincronização (frequência, mecanismo, proteção do endpoint) no `readme.md` raiz (seção exigida pelo readme seção 6)
+- [x] T023 Rodar `quickstart.md` manualmente e confirmar os 3 cenários de validação
 
 ---
 
