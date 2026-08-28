@@ -8,11 +8,11 @@
 
 ## Phase 1: Setup
 
-- [ ] T001 Adicionar `@clerk/fastify` a `apps/api/package.json` e `@clerk/clerk-react` a
+- [x] T001 Adicionar `@clerk/fastify` a `apps/api/package.json` e `@clerk/clerk-react` a
       `apps/web/package.json` (confirmar versão atual antes de instalar — ver research.md)
-- [ ] T002 Adicionar `CLERK_SECRET_KEY`, `CLERK_PUBLISHABLE_KEY`, `VITE_CLERK_PUBLISHABLE_KEY` a
+- [x] T002 Adicionar `CLERK_SECRET_KEY`, `CLERK_PUBLISHABLE_KEY`, `VITE_CLERK_PUBLISHABLE_KEY` a
       `.env.example` e `env.ts`
-- [ ] T003 [P] Criar migration para tabela `favorito` (`user_id`, `indicador_id`,
+- [x] T003 [P] Criar migration para tabela `favorito` (`user_id`, `indicador_id`,
       unique `(user_id, indicador_id)`) em `apps/api/migrations/`
 
 ---
