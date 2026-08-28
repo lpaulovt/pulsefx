@@ -8,13 +8,13 @@ import { PostgresObservacaoRepository } from "./infrastructure/persistence/postg
 import { registrarSyncJobs } from "./infrastructure/scheduler/sync-scheduler.js";
 
 async function main(): Promise<void> {
-  const app = await buildServer();
-
   const sincronizarIndicador = new SincronizarIndicador(
     { bcb: new BcbClient(), fred: new FredClient(env.fredApiKey) },
     new PostgresObservacaoRepository(),
     new PostgresJobExecucaoRepository(),
   );
+
+  const app = await buildServer({ sincronizarIndicador });
   registrarSyncJobs(sincronizarIndicador);
 
   await app.listen({ port: env.port, host: "0.0.0.0" });
