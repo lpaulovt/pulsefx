@@ -1,7 +1,15 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import type { DashboardItem } from "@pulsefx/shared-types";
-import { IndicadorCard } from "../../src/components/IndicadorCard.js";
+
+// IndicadorCard agora inclui BotaoFavoritar (T014/specs/003-favoritos), que usa useAuth -
+// exige ClerkProvider real. Mockado aqui porque estes testes sao sobre formatacao de
+// variacao (001-dashboard/002-detalhe-serie), nao sobre favoritar.
+vi.mock("@clerk/clerk-react", () => ({
+  useAuth: () => ({ isSignedIn: false, getToken: vi.fn() }),
+}));
+
+const { IndicadorCard } = await import("../../src/components/IndicadorCard.js");
 
 function itemBase(overrides: Partial<DashboardItem>): DashboardItem {
   return {

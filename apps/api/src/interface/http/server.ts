@@ -6,8 +6,12 @@ import { healthRoutes } from "./routes/health.routes.js";
 import { adminSyncRoutes, type AdminSyncRoutesDeps } from "./routes/admin-sync.routes.js";
 import { indicadoresRoutes, type IndicadoresRoutesDeps } from "./routes/indicadores.routes.js";
 import { serieRoutes, type SerieRoutesDeps } from "./routes/serie.routes.js";
+import { favoritosRoutes, type FavoritosRoutesDeps } from "./routes/favoritos.routes.js";
 
-export type ServerDeps = AdminSyncRoutesDeps & IndicadoresRoutesDeps & SerieRoutesDeps;
+export type ServerDeps = AdminSyncRoutesDeps &
+  IndicadoresRoutesDeps &
+  SerieRoutesDeps &
+  FavoritosRoutesDeps;
 
 export async function buildServer(deps: ServerDeps): Promise<FastifyInstance> {
   const app = Fastify({ logger: true });
@@ -20,6 +24,7 @@ export async function buildServer(deps: ServerDeps): Promise<FastifyInstance> {
   await app.register((instance) => adminSyncRoutes(instance, deps));
   await app.register((instance) => indicadoresRoutes(instance, deps));
   await app.register((instance) => serieRoutes(instance, deps));
+  await app.register((instance) => favoritosRoutes(instance, deps));
 
   return app;
 }

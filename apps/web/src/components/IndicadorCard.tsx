@@ -1,5 +1,6 @@
 import type { DashboardItem } from "@pulsefx/shared-types";
 import { formatarData, formatarValor, formatarVariacao } from "../lib/format.js";
+import { BotaoFavoritar } from "./BotaoFavoritar.js";
 
 export function IndicadorCard({ item }: { item: DashboardItem }) {
   return (
@@ -7,6 +8,7 @@ export function IndicadorCard({ item }: { item: DashboardItem }) {
       <header>
         <h2>{item.nome}</h2>
         <span>{item.tipoSerie === "fx-diaria" ? "Diario" : "Mensal"}</span>
+        <BotaoFavoritar indicadorId={item.indicadorId} />
       </header>
       {item.ultimoValor !== null && item.dataReferencia !== null ? (
         <>

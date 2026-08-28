@@ -41,20 +41,20 @@
 
 ### Tests for User Story 1
 
-- [ ] T009 [P] [US1] Teste HTTP: 401 sem sessão, 204 com sessão válida (marcar/desmarcar), em
+- [x] T009 [P] [US1] Teste HTTP: 401 sem sessão, 204 com sessão válida (marcar/desmarcar), em
       `apps/api/tests/http/favoritos.routes.test.ts`
-- [ ] T010 [P] [US1] Teste de persistência: upsert idempotente em
+- [x] T010 [P] [US1] Teste de persistência: upsert idempotente em
       `apps/api/tests/persistence/favorito-repository.test.ts`
 
 ### Implementation for User Story 1
 
-- [ ] T011 [US1] Implementar casos de uso `MarcarFavorito`/`DesmarcarFavorito` em
+- [x] T011 [US1] Implementar casos de uso `MarcarFavorito`/`DesmarcarFavorito` em
       `apps/api/src/application/favorito/` (usa T005)
-- [ ] T012 [US1] Implementar rotas `POST`/`DELETE /favoritos/:indicadorId` em
+- [x] T012 [US1] Implementar rotas `POST`/`DELETE /favoritos/:indicadorId` em
       `apps/api/src/interface/http/routes/favoritos.routes.ts` (usa `getAuth`, T004, T011)
-- [ ] T013 [P] [US1] Implementar `BotaoFavoritar` (chama POST/DELETE, estado otimista, exige
+- [x] T013 [P] [US1] Implementar `BotaoFavoritar` (chama POST/DELETE, estado otimista, exige
       sessão — usa guarda de T008) em `apps/web/src/components/BotaoFavoritar.tsx`
-- [ ] T014 [US1] Incluir `BotaoFavoritar` em `IndicadorCard` (specs/001-dashboard) — decisão de UI
+- [x] T014 [US1] Incluir `BotaoFavoritar` em `IndicadorCard` (specs/001-dashboard) — decisão de UI
       já aberta na vision, resolvida aqui: card do Dashboard ganha o controle
 
 **Checkpoint**: marcar/desmarcar funcional, incluindo fluxo de login quando necessário.
