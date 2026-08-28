@@ -44,24 +44,24 @@ mostra 4 cards.
 
 ### Tests for User Story 1
 
-- [ ] T005 [P] [US1] Teste de domínio: `VariacaoService` (fx-diária D-1, macro-mensal N=1 mês,
+- [x] T005 [P] [US1] Teste de domínio: `VariacaoService` (fx-diária D-1, macro-mensal N=1 mês,
       Selic em p.p.) em `apps/api/tests/domain/variacao-service.test.ts`
-- [ ] T006 [P] [US1] Teste HTTP: contrato de `GET /indicadores` (schema da resposta) em
+- [x] T006 [P] [US1] Teste HTTP: contrato de `GET /indicadores` (schema da resposta) em
       `apps/api/tests/http/indicadores.routes.test.ts`
-- [ ] T007 [P] [US1] Teste de frontend: hook `useDashboard` renderiza 4 cards a partir de resposta
+- [x] T007 [P] [US1] Teste de frontend: hook `useDashboard` renderiza 4 cards a partir de resposta
       mockada, em `apps/web/tests/frontend/use-dashboard.test.tsx`
 
 ### Implementation for User Story 1
 
-- [ ] T008 [US1] Implementar caso de uso `ObterDashboard` em
+- [x] T008 [US1] Implementar caso de uso `ObterDashboard` em
       `apps/api/src/application/indicador/obter-dashboard.ts` (usa T002, T003)
-- [ ] T009 [US1] Implementar rota `GET /indicadores` em
+- [x] T009 [US1] Implementar rota `GET /indicadores` em
       `apps/api/src/interface/http/routes/indicadores.routes.ts`
-- [ ] T010 [US1] Registrar rota em `apps/api/src/interface/http/server.ts`
-- [ ] T011 [P] [US1] Implementar `useDashboard` (fetch + estado) em `apps/web/src/hooks/use-dashboard.ts`
-- [ ] T012 [P] [US1] Implementar `IndicadorCard` (nome, valor, data, variação, badge diária/mensal)
+- [x] T010 [US1] Registrar rota em `apps/api/src/interface/http/server.ts`
+- [x] T011 [P] [US1] Implementar `useDashboard` (fetch + estado) em `apps/web/src/hooks/use-dashboard.ts`
+- [x] T012 [P] [US1] Implementar `IndicadorCard` (nome, valor, data, variação, badge diária/mensal)
       em `apps/web/src/components/IndicadorCard.tsx`
-- [ ] T013 [US1] Implementar página `Dashboard` em `apps/web/src/pages/Dashboard.tsx` (usa T011, T012)
+- [x] T013 [US1] Implementar página `Dashboard` em `apps/web/src/pages/Dashboard.tsx` (usa T011, T012)
 
 **Checkpoint**: Dashboard funcional e testável de ponta a ponta.
 
