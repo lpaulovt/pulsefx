@@ -110,8 +110,13 @@ nunca 0%.
 
 ## Phase 6: Polish
 
-- [ ] T018 Rodar `quickstart.md` manualmente e confirmar consistência com
+- [x] T018 Rodar `quickstart.md` manualmente e confirmar consistência com
       `specs/002-detalhe-serie` (mesma variação, mesmo indicador/data)
+      (validado: `GET /indicadores` com dado real sincronizado bate com
+      `contracts/get-indicadores.md`; dashboard web mostra os 4 cards, disclaimer
+      visível sem interação, estado indisponível explícito - nunca "0%". Comparação
+      efetiva com 002-detalhe-serie fica pendente: essa spec ainda não está
+      implementada nesta rodada, fora do escopo das issues #7-#12)
 
 ---
 
