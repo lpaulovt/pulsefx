@@ -122,6 +122,59 @@ Trading, ordens, conta bancária, pagamentos, KYC completo, recomendação de in
 
 ---
 
+## 10. Política de sincronização (implementação — `specs/004-sincronizacao`)
+
+Requisito da seção 4.4: atualização por mecanismo agendado, sem depender de tráfego de usuário,
+com contingência protegida. Implementado em `apps/api` da seguinte forma:
+
+### Mecanismo
+
+- **Job agendado (`node-cron`)** — único disparador de chamadas a BCB/FRED. Nenhuma rota de
+  Dashboard/Detalhe/Favoritos chama fonte externa; todas leem apenas o Postgres já sincronizado
+  (FR-005). Registrado em `apps/api/src/infrastructure/scheduler/sync-scheduler.ts` e iniciado em
+  `apps/api/src/main.ts`.
+- **Endpoint de contingência**: `POST /admin/sync` (protegido, ver abaixo) força uma sincronização
+  fora do ciclo — para demonstração/depuração, nunca substitui o job agendado.
+
+### Frequência (por tipo de série, `docs/product/sincronizacao-vision.md` §5.1)
+
+| Tipo de série | Indicadores | Cron | Frequência |
+|---|---|---|---|
+| `fx-diaria` | USD/BRL PTAX | `0 18 * * 1-5` | 1x por dia útil, após o horário em que o BCB publica o fechamento PTAX |
+| `macro-mensal` | Meta Selic, IPCA, FEDFUNDS | `0 19 * * *` | 1x por dia (verificação — o dado só muda quando a fonte publica, mas a checagem diária evita hardcodar calendário de divulgação de cada fonte) |
+
+Rodar com mais frequência do que a tabela acima é o "chamada descontrolada/redundante" que esta
+política existe para evitar (FR-002).
+
+### Proteção do endpoint admin
+
+Header `X-Admin-Key` comparado à env var `ADMIN_SYNC_KEY` — `401 { "error": "unauthorized" }` se
+ausente ou incorreto (`apps/api/src/interface/http/plugins/admin-auth.ts`). Decisão registrada em
+`specs/004-sincronizacao/research.md`: chave simples é proporcional ao requisito ("protegido, não
+público") sem acoplar ao Clerk (usado só por `specs/003-favoritos`, módulo não relacionado).
+
+```bash
+curl -X POST http://localhost:3000/admin/sync \
+  -H "X-Admin-Key: $ADMIN_SYNC_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{}'
+# 202 { "status": "accepted", "indicadores": [...] }
+```
+
+### Resiliência a falha de fonte externa (FR-006)
+
+`SincronizarIndicador` (caso de uso) faz 1 tentativa + 1 retry com backoff fixo curto (5s); se
+ambas falharem, a falha é registrada em `job_execucao` (`status = falha_fonte_externa`, com
+`detalhe`) e a exceção **nunca** propaga para o scheduler/rota — a última `observacao` válida
+persistida continua servindo Dashboard/Detalhe sem erro visível ao usuário final.
+
+### Idempotência
+
+Upsert por `(indicador_id, data_referencia)` (`apps/api/migrations/*_create-sincronizacao-tables.cjs`)
+— reprocessar a mesma janela (job rodando de novo, ou `POST /admin/sync` chamado duas vezes) nunca
+duplica observação.
+
+---
 
 **Versão do briefing:** 1.9  
 **Última atualização:** 2026-06-10
