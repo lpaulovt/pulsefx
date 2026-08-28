@@ -48,3 +48,13 @@ export async function desmarcarFavorito(indicadorId: string, token: string | nul
     throw new Error(`Falha ao desmarcar favorito (HTTP ${resposta.status})`);
   }
 }
+
+// GET /favoritos (US2) - mesmo shape de DashboardResponse (contracts/favoritos.md), so
+// os indicadores favoritados do usuario autenticado.
+export async function getFavoritos(token: string | null): Promise<DashboardResponse> {
+  const resposta = await fetch(`${API_BASE_URL}/favoritos`, { headers: authHeaders(token) });
+  if (!resposta.ok) {
+    throw new Error(`Falha ao carregar favoritos (HTTP ${resposta.status})`);
+  }
+  return (await resposta.json()) as DashboardResponse;
+}

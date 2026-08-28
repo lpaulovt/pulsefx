@@ -70,16 +70,16 @@
 
 ### Tests for User Story 2
 
-- [ ] T015 [P] [US2] Teste de integração: marcar → nova "sessão" (novo token da mesma conta) →
+- [x] T015 [P] [US2] Teste de integração: marcar → nova "sessão" (novo token da mesma conta) →
       favorito ainda presente, em `apps/api/tests/integration/favoritos-persistencia.test.ts`
 
 ### Implementation for User Story 2
 
-- [ ] T016 [US2] Implementar caso de uso `ListarFavoritos` (reaproveita `ObterDashboard` de
+- [x] T016 [US2] Implementar caso de uso `ListarFavoritos` (reaproveita `ObterDashboard` de
       specs/001-dashboard filtrado por favoritos) em `apps/api/src/application/favorito/listar-favoritos.ts`
-- [ ] T017 [US2] Implementar rota `GET /favoritos` em `favoritos.routes.ts` (T012)
-- [ ] T018 [P] [US2] Implementar `useFavoritos` (fetch autenticado) em `apps/web/src/hooks/use-favoritos.ts`
-- [ ] T019 [US2] Implementar página `MeusIndicadores` em `apps/web/src/pages/MeusIndicadores.tsx`
+- [x] T017 [US2] Implementar rota `GET /favoritos` em `favoritos.routes.ts` (T012)
+- [x] T018 [P] [US2] Implementar `useFavoritos` (fetch autenticado) em `apps/web/src/hooks/use-favoritos.ts`
+- [x] T019 [US2] Implementar página `MeusIndicadores` em `apps/web/src/pages/MeusIndicadores.tsx`
       (reaproveita `IndicadorCard` de specs/001-dashboard; protegida pela guarda de T008)
 
 **Checkpoint**: favoritos persistem e são visíveis em tela própria.
