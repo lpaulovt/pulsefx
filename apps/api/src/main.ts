@@ -1,8 +1,10 @@
 import { buildServer } from "./interface/http/server.js";
 import { env } from "./infrastructure/config/env.js";
 import { SincronizarIndicador } from "./application/sincronizacao/sincronizar-indicador.js";
+import { ObterDashboard } from "./application/indicador/obter-dashboard.js";
 import { BcbClient } from "./infrastructure/http-clients/bcb-client.js";
 import { FredClient } from "./infrastructure/http-clients/fred-client.js";
+import { PostgresIndicadorRepository } from "./infrastructure/persistence/postgres/indicador-repository.js";
 import { PostgresJobExecucaoRepository } from "./infrastructure/persistence/postgres/job-execucao-repository.js";
 import { PostgresObservacaoRepository } from "./infrastructure/persistence/postgres/observacao-repository.js";
 import { registrarSyncJobs } from "./infrastructure/scheduler/sync-scheduler.js";
@@ -13,8 +15,9 @@ async function main(): Promise<void> {
     new PostgresObservacaoRepository(),
     new PostgresJobExecucaoRepository(),
   );
+  const obterDashboard = new ObterDashboard(new PostgresIndicadorRepository());
 
-  const app = await buildServer({ sincronizarIndicador });
+  const app = await buildServer({ sincronizarIndicador, obterDashboard });
   registrarSyncJobs(sincronizarIndicador);
 
   await app.listen({ port: env.port, host: "0.0.0.0" });
