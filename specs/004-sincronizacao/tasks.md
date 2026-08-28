@@ -19,12 +19,12 @@ persistência, HTTP e integração; este módulo cobre domínio + persistência 
 
 ## Phase 2: Foundational (bloqueia as user stories)
 
-- [ ] T004 Criar tipos de domínio `Indicador`, `TipoSerie`, `Observacao` em `apps/api/src/domain/indicador/` (compartilhado com specs/001-dashboard)
-- [ ] T005 Criar interface `ObservacaoRepository` (porta) em `apps/api/src/domain/sincronizacao/observacao-repository.ts`
-- [ ] T006 [P] Implementar `PostgresObservacaoRepository` (upsert por `(indicador_id, data_referencia)`) em `apps/api/src/infrastructure/persistence/postgres/observacao-repository.ts`
-- [ ] T007 [P] Implementar `BcbClient` (PTAX, Selic, IPCA) em `apps/api/src/infrastructure/http-clients/bcb-client.ts`
-- [ ] T008 [P] Implementar `FredClient` (FEDFUNDS) em `apps/api/src/infrastructure/http-clients/fred-client.ts`
-- [ ] T009 Criar middleware de autenticação do endpoint admin (`X-Admin-Key`) em `apps/api/src/interface/http/plugins/admin-auth.ts`
+- [x] T004 Criar tipos de domínio `Indicador`, `TipoSerie`, `Observacao` em `apps/api/src/domain/indicador/` (compartilhado com specs/001-dashboard)
+- [x] T005 Criar interface `ObservacaoRepository` (porta) em `apps/api/src/domain/sincronizacao/observacao-repository.ts`
+- [x] T006 [P] Implementar `PostgresObservacaoRepository` (upsert por `(indicador_id, data_referencia)`) em `apps/api/src/infrastructure/persistence/postgres/observacao-repository.ts`
+- [x] T007 [P] Implementar `BcbClient` (PTAX, Selic, IPCA) em `apps/api/src/infrastructure/http-clients/bcb-client.ts`
+- [x] T008 [P] Implementar `FredClient` (FEDFUNDS) em `apps/api/src/infrastructure/http-clients/fred-client.ts`
+- [x] T009 Criar middleware de autenticação do endpoint admin (`X-Admin-Key`) em `apps/api/src/interface/http/plugins/admin-auth.ts`
 
 **Checkpoint**: fundação pronta — user stories podem começar.
 
