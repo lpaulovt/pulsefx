@@ -36,23 +36,23 @@ ordenados cronologicamente.
 
 ### Tests for User Story 1
 
-- [ ] T005 [P] [US1] Teste de domínio: janela 30 (fx-diária) / 12 (macro-mensal) via
+- [x] T005 [P] [US1] Teste de domínio: janela 30 (fx-diária) / 12 (macro-mensal) via
       `buscarSerie`, em `apps/api/tests/domain/janela-historico.test.ts`
-- [ ] T006 [P] [US1] Teste HTTP: contrato de `GET /indicadores/:id/serie` (200 e 404) em
+- [x] T006 [P] [US1] Teste HTTP: contrato de `GET /indicadores/:id/serie` (200 e 404) em
       `apps/api/tests/http/serie.routes.test.ts`
 
 ### Implementation for User Story 1
 
-- [ ] T007 [US1] Implementar caso de uso `ObterSerie` em
+- [x] T007 [US1] Implementar caso de uso `ObterSerie` em
       `apps/api/src/application/indicador/obter-serie.ts` (usa T002, `VariacaoService` de
       specs/001-dashboard)
-- [ ] T008 [US1] Implementar rota `GET /indicadores/:id/serie` em
+- [x] T008 [US1] Implementar rota `GET /indicadores/:id/serie` em
       `apps/api/src/interface/http/routes/serie.routes.ts`
-- [ ] T009 [US1] Registrar rota em `apps/api/src/interface/http/server.ts`
-- [ ] T010 [P] [US1] Implementar `useSerie` (fetch por indicador) em `apps/web/src/hooks/use-serie.ts`
-- [ ] T011 [P] [US1] Implementar `SerieTabela` (data de referência + valor + variação por linha)
+- [x] T009 [US1] Registrar rota em `apps/api/src/interface/http/server.ts`
+- [x] T010 [P] [US1] Implementar `useSerie` (fetch por indicador) em `apps/web/src/hooks/use-serie.ts`
+- [x] T011 [P] [US1] Implementar `SerieTabela` (data de referência + valor + variação por linha)
       em `apps/web/src/components/SerieTabela.tsx`
-- [ ] T012 [US1] Implementar página `DetalheSerie` em `apps/web/src/pages/DetalheSerie.tsx` (usa
+- [x] T012 [US1] Implementar página `DetalheSerie` em `apps/web/src/pages/DetalheSerie.tsx` (usa
       T010, T011)
 
 **Checkpoint**: Detalhe funcional, consistente com Dashboard.
