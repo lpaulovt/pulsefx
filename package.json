@@ -1,0 +1,29 @@
+{
+  "name": "pulsefx",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Pulse FX monorepo: API (Node.js/TypeScript) + web (React/TypeScript) + tipos compartilhados.",
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:api": "npm run dev -w apps/api",
+    "dev:web": "npm run dev -w apps/web",
+    "build": "npm run build --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present",
+    "lint": "npm run lint --workspaces --if-present",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "migrate": "npm run migrate -w apps/api"
+  },
+  "devDependencies": {
+    "typescript": "^7.0.2",
+    "eslint": "^10.9.1",
+    "@eslint/js": "^10.9.1",
+    "typescript-eslint": "^8.68.0",
+    "prettier": "^3.9.6"
+  }
+}

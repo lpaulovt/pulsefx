@@ -1,0 +1,15 @@
+{
+  "name": "@pulsefx/shared-types",
+  "private": true,
+  "version": "0.1.0",
+  "description": "DTOs compartilhados entre apps/api e apps/web (contrato HTTP, nunca tipos de domínio internos).",
+  "type": "module",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "typescript": "^7.0.2"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "name": "@pulsefx/api",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/main.ts",
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/main.js",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "eslint src tests",
+    "typecheck": "tsc --noEmit",
+    "migrate": "node-pg-migrate",
+    "migrate:up": "node-pg-migrate up",
+    "migrate:down": "node-pg-migrate down"
+  },
+  "dependencies": {
+    "@pulsefx/shared-types": "*",
+    "fastify": "^5.12.1",
+    "@fastify/cors": "^11.3.0",
+    "pg": "^8.23.0",
+    "zod": "^4.5.1"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "@types/pg": "^8.11.0",
+    "node-pg-migrate": "^9.0.0",
+    "tsx": "^4.23.12",
+    "typescript": "^7.0.2",
+    "vitest": "^4.1.11"
+  }
+}
