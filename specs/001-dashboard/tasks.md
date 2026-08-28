@@ -12,9 +12,11 @@ reaproveita, não recria).
 
 ## Phase 1: Setup
 
-- [ ] T001 Confirmar seed do conjunto fechado de indicadores (USD/BRL PTAX, Meta Selic, IPCA,
+- [x] T001 Confirmar seed do conjunto fechado de indicadores (USD/BRL PTAX, Meta Selic, IPCA,
       FEDFUNDS) na migration criada em `specs/004-sincronizacao` (T003) — se ainda não populada,
       adicionar `INSERT` na migration em `apps/api/migrations/`
+      (já coberto: `apps/api/migrations/1787948249583_create-sincronizacao-tables.cjs` já
+      insere os 4 indicadores; nenhuma migration nova necessária)
 
 ---
 
