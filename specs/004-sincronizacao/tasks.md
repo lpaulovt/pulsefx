@@ -11,9 +11,9 @@ persistência, HTTP e integração; este módulo cobre domínio + persistência 
 
 ## Phase 1: Setup
 
-- [ ] T001 Adicionar `node-cron` às dependências de `apps/api/package.json`
-- [ ] T002 Adicionar `ADMIN_SYNC_KEY` a `.env.example` e a `env` em `apps/api/src/infrastructure/config/env.ts`
-- [ ] T003 [P] Criar migration `node-pg-migrate` para tabelas `indicador`, `observacao`, `job_execucao` em `apps/api/migrations/`
+- [x] T001 Adicionar `node-cron` às dependências de `apps/api/package.json`
+- [x] T002 Adicionar `ADMIN_SYNC_KEY` a `.env.example` e a `env` em `apps/api/src/infrastructure/config/env.ts`
+- [x] T003 [P] Criar migration `node-pg-migrate` para tabelas `indicador`, `observacao`, `job_execucao` em `apps/api/migrations/`
 
 ---
 
