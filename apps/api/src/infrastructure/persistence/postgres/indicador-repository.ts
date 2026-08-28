@@ -3,6 +3,7 @@ import type { Fonte, Indicador, TipoSerie, Unidade } from "../../../domain/indic
 import type {
   IndicadorComObservacoes,
   IndicadorRepository,
+  SerieIndicador,
 } from "../../../domain/indicador/indicador-repository.js";
 import { pool } from "./client.js";
 
@@ -58,5 +59,48 @@ export class PostgresIndicadorRepository implements IndicadorRepository {
       porIndicador.set(row.id, entrada);
     }
     return [...porIndicador.values()];
+  }
+
+  async buscarSerie(indicadorId: string, limit: number): Promise<SerieIndicador | null> {
+    // Mesma tecnica de listarComUltimasObservacoes, mas para 1 indicador e LIMIT
+    // parametrizado (janela por tipo_serie, research.md) - depois reverte para ordem
+    // cronologica (mais antiga primeiro), que e a ordem de exibicao do Detalhe.
+    const { rows } = await this.db.query<Row>(
+      `SELECT i.id, i.nome, i.tipo_serie, i.fonte, i.unidade,
+              o.data_referencia::text AS data_referencia, o.valor::float AS valor
+       FROM indicador i
+       LEFT JOIN LATERAL (
+         SELECT data_referencia, valor
+         FROM observacao
+         WHERE observacao.indicador_id = i.id
+         ORDER BY data_referencia DESC
+         LIMIT $2
+       ) o ON true
+       WHERE i.id = $1
+       ORDER BY o.data_referencia ASC NULLS LAST`,
+      [indicadorId, limit],
+    );
+
+    const primeira = rows[0];
+    if (!primeira) {
+      return null;
+    }
+
+    const indicador: Indicador = {
+      id: primeira.id,
+      nome: primeira.nome,
+      tipoSerie: primeira.tipo_serie,
+      fonte: primeira.fonte,
+      unidade: primeira.unidade,
+    };
+    const observacoes = rows
+      .filter((row) => row.data_referencia !== null && row.valor !== null)
+      .map((row) => ({
+        indicadorId: row.id,
+        dataReferencia: row.data_referencia as string,
+        valor: row.valor as number,
+      }));
+
+    return { indicador, observacoes };
   }
 }

@@ -15,12 +15,12 @@
 
 ## Phase 2: Foundational
 
-- [ ] T002 Adicionar método de janela (`buscarSerie(indicadorId, limit)`) ao
+- [x] T002 Adicionar método de janela (`buscarSerie(indicadorId, limit)`) ao
       `IndicadorRepository` existente em
       `apps/api/src/infrastructure/persistence/postgres/indicador-repository.ts`
-- [ ] T003 [P] Criar constante `limitacoes.ts` (texto por `tipoSerie`/`fonte`) em
+- [x] T003 [P] Criar constante `limitacoes.ts` (texto por `tipoSerie`/`fonte`) em
       `apps/api/src/domain/indicador/limitacoes.ts`
-- [ ] T004 [P] Definir DTO `SerieResponse`/`SerieItem` em `packages/shared-types/src/serie.ts`
+- [x] T004 [P] Definir DTO `SerieResponse`/`SerieItem` em `packages/shared-types/src/serie.ts`
 
 **Checkpoint**: extensão da fundação do Dashboard pronta.
 
