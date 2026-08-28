@@ -1,6 +1,10 @@
-import { describe, expect, it, vi } from "vitest";
-import { render, screen, waitFor } from "@testing-library/react";
+import { afterEach, describe, expect, it, vi } from "vitest";
+import { cleanup, render, screen, waitFor } from "@testing-library/react";
 import type { SerieResponse } from "@pulsefx/shared-types";
+
+// Sem setupFiles global de cleanup neste workspace - 2 describe blocks neste arquivo
+// renderizam DetalheSerie, entao cada teste precisa desmontar o anterior.
+afterEach(cleanup);
 
 const serieIncompleta: SerieResponse = {
   indicadorId: "ipca",
@@ -25,5 +29,16 @@ describe("DetalheSerie - US1", () => {
 
     expect(screen.getByText("01/08/2026")).toBeTruthy();
     expect(screen.getByText(/ainda sendo formado/i)).toBeTruthy();
+  });
+});
+
+describe("DetalheSerie - US2", () => {
+  it("mostra texto de limitacoes e disclaimer sem exigir acao extra do usuario", async () => {
+    render(<DetalheSerie indicadorId="ipca" />);
+
+    // Disclaimer e' estatico, visivel desde a renderizacao inicial (nao espera a serie carregar).
+    expect(screen.getByText(/não é recomendação de investimento/i)).toBeTruthy();
+
+    await waitFor(() => expect(screen.getByText(serieIncompleta.textoLimitacoes)).toBeTruthy());
   });
 });
