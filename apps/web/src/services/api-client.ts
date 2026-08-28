@@ -23,3 +23,28 @@ export async function getSerie(indicadorId: string): Promise<SerieResponse> {
   }
   return (await resposta.json()) as SerieResponse;
 }
+
+function authHeaders(token: string | null): HeadersInit {
+  return token ? { Authorization: `Bearer ${token}` } : {};
+}
+
+// contracts/favoritos.md (specs/003-favoritos) - exige sessao Clerk (401 sem token).
+export async function marcarFavorito(indicadorId: string, token: string | null): Promise<void> {
+  const resposta = await fetch(`${API_BASE_URL}/favoritos/${encodeURIComponent(indicadorId)}`, {
+    method: "POST",
+    headers: authHeaders(token),
+  });
+  if (!resposta.ok) {
+    throw new Error(`Falha ao marcar favorito (HTTP ${resposta.status})`);
+  }
+}
+
+export async function desmarcarFavorito(indicadorId: string, token: string | null): Promise<void> {
+  const resposta = await fetch(`${API_BASE_URL}/favoritos/${encodeURIComponent(indicadorId)}`, {
+    method: "DELETE",
+    headers: authHeaders(token),
+  });
+  if (!resposta.ok) {
+    throw new Error(`Falha ao desmarcar favorito (HTTP ${resposta.status})`);
+  }
+}

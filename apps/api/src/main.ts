@@ -8,6 +8,9 @@ import { FredClient } from "./infrastructure/http-clients/fred-client.js";
 import { PostgresIndicadorRepository } from "./infrastructure/persistence/postgres/indicador-repository.js";
 import { PostgresJobExecucaoRepository } from "./infrastructure/persistence/postgres/job-execucao-repository.js";
 import { PostgresObservacaoRepository } from "./infrastructure/persistence/postgres/observacao-repository.js";
+import { PostgresFavoritoRepository } from "./infrastructure/persistence/postgres/favorito-repository.js";
+import { MarcarFavorito } from "./application/favorito/marcar-favorito.js";
+import { DesmarcarFavorito } from "./application/favorito/desmarcar-favorito.js";
 import { registrarSyncJobs } from "./infrastructure/scheduler/sync-scheduler.js";
 
 async function main(): Promise<void> {
@@ -19,8 +22,17 @@ async function main(): Promise<void> {
   const indicadorRepository = new PostgresIndicadorRepository();
   const obterDashboard = new ObterDashboard(indicadorRepository);
   const obterSerie = new ObterSerie(indicadorRepository);
+  const favoritoRepository = new PostgresFavoritoRepository();
+  const marcarFavorito = new MarcarFavorito(favoritoRepository);
+  const desmarcarFavorito = new DesmarcarFavorito(favoritoRepository);
 
-  const app = await buildServer({ sincronizarIndicador, obterDashboard, obterSerie });
+  const app = await buildServer({
+    sincronizarIndicador,
+    obterDashboard,
+    obterSerie,
+    marcarFavorito,
+    desmarcarFavorito,
+  });
   registrarSyncJobs(sincronizarIndicador);
 
   await app.listen({ port: env.port, host: "0.0.0.0" });
