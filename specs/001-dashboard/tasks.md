@@ -76,13 +76,17 @@ nunca 0%.
 
 ### Tests for User Story 2
 
-- [ ] T014 [P] [US2] Teste de domínio: `VariacaoService` retorna `indisponivel` com 0 ou 1
+- [x] T014 [P] [US2] Teste de domínio: `VariacaoService` retorna `indisponivel` com 0 ou 1
       observação, em `apps/api/tests/domain/variacao-service.test.ts` (estende T005)
+      (já coberto pelos casos "historico_insuficiente"/"sem_observacao" adicionados em #9;
+      guardrail de UI reforçado por novo teste de componente em #10, ver T015)
 
 ### Implementation for User Story 2
 
-- [ ] T015 [US2] Tratar `variacao.tipo === "indisponivel"` no `IndicadorCard` (T012) — mensagem
+- [x] T015 [US2] Tratar `variacao.tipo === "indisponivel"` no `IndicadorCard` (T012) — mensagem
       explícita, nunca "0%" nem traço silencioso
+      (já implementado em #9; adicionado `apps/web/tests/frontend/IndicadorCard.test.tsx`
+      cobrindo os 2 casos de indisponibilidade + edge case "Selic 0,00 p.p." do spec.md)
 
 **Checkpoint**: guardrail de "nunca fabricar variação" coberto por teste e UI.
 
