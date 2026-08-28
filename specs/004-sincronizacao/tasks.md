@@ -39,16 +39,16 @@ Postgres de teste e verificar que `Observacao` foi persistida para os 4 indicado
 
 ### Tests for User Story 1
 
-- [ ] T010 [P] [US1] Teste de domínio: normalização de payload BCB/FRED → `Observacao`, em `apps/api/tests/domain/sincronizacao.test.ts`
-- [ ] T011 [P] [US1] Teste de persistência: upsert idempotente `(indicador_id, data_referencia)`, em `apps/api/tests/persistence/observacao-repository.test.ts`
-- [ ] T012 [P] [US1] Teste de integração: caso de uso completo (client fake → domínio → repositório) contra Postgres de teste, em `apps/api/tests/integration/sincronizacao.test.ts`
+- [x] T010 [P] [US1] Teste de domínio: normalização de payload BCB/FRED → `Observacao`, em `apps/api/tests/domain/sincronizacao.test.ts`
+- [x] T011 [P] [US1] Teste de persistência: upsert idempotente `(indicador_id, data_referencia)`, em `apps/api/tests/persistence/observacao-repository.test.ts`
+- [x] T012 [P] [US1] Teste de integração: caso de uso completo (client fake → domínio → repositório) contra Postgres de teste, em `apps/api/tests/integration/sincronizacao.test.ts`
 
 ### Implementation for User Story 1
 
-- [ ] T013 [US1] Implementar caso de uso `SincronizarIndicador` (application) em `apps/api/src/application/sincronizacao/sincronizar-indicador.ts` (depende de T004-T008)
-- [ ] T014 [US1] Registrar jobs `node-cron` (fx-diária 1x/dia útil, macro-mensal 1x/dia) em `apps/api/src/infrastructure/scheduler/sync-scheduler.ts`
-- [ ] T015 [US1] Inicializar scheduler em `apps/api/src/main.ts`
-- [ ] T016 [US1] Registrar execução em `JobExecucao` (sucesso/falha) dentro do caso de uso (T013)
+- [x] T013 [US1] Implementar caso de uso `SincronizarIndicador` (application) em `apps/api/src/application/sincronizacao/sincronizar-indicador.ts` (depende de T004-T008)
+- [x] T014 [US1] Registrar jobs `node-cron` (fx-diária 1x/dia útil, macro-mensal 1x/dia) em `apps/api/src/infrastructure/scheduler/sync-scheduler.ts`
+- [x] T015 [US1] Inicializar scheduler em `apps/api/src/main.ts`
+- [x] T016 [US1] Registrar execução em `JobExecucao` (sucesso/falha) dentro do caso de uso (T013)
 
 **Checkpoint**: sincronização agendada funcional e testável de ponta a ponta.
 
