@@ -13,7 +13,9 @@ export function Dashboard() {
       {erro && <p role="alert">{erro}</p>}
       <div>
         {indicadores.map((item) => (
-          <IndicadorCard key={item.indicadorId} item={item} />
+          <a key={item.indicadorId} href={`#${item.indicadorId}`}>
+            <IndicadorCard item={item} />
+          </a>
         ))}
       </div>
     </main>
