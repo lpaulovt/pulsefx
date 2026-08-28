@@ -100,9 +100,9 @@ nunca 0%.
 
 ### Implementation for User Story 3
 
-- [ ] T016 [P] [US3] Implementar componente `Disclaimer` (texto fixo, sempre visível, sem
+- [x] T016 [P] [US3] Implementar componente `Disclaimer` (texto fixo, sempre visível, sem
       tooltip/modal) em `apps/web/src/components/Disclaimer.tsx`
-- [ ] T017 [US3] Incluir `Disclaimer` em `Dashboard.tsx` (T013), acima ou junto aos cards
+- [x] T017 [US3] Incluir `Disclaimer` em `Dashboard.tsx` (T013), acima ou junto aos cards
 
 **Checkpoint**: todas as user stories da feature funcionais.
 
