@@ -2,6 +2,7 @@
   "name": "pulsefx",
   "private": true,
   "version": "0.1.0",
+  "type": "module",
   "description": "Pulse FX monorepo: API (Node.js/TypeScript) + web (React/TypeScript) + tipos compartilhados.",
   "engines": {
     "node": ">=24.0.0"
@@ -20,9 +21,9 @@
     "migrate": "npm run migrate -w apps/api"
   },
   "devDependencies": {
-    "typescript": "^7.0.2",
+    "typescript": "^6.0.3",
     "eslint": "^10.9.1",
-    "@eslint/js": "^10.9.1",
+    "@eslint/js": "^10.0.1",
     "typescript-eslint": "^8.68.0",
     "prettier": "^3.9.6"
   }
