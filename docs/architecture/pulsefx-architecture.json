@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Pulse FX — Arquitetura",
+    "subtitle": "Monorepo apps/api (Fastify, DDD-lite) + apps/web (React) — sincronização, indicadores e favoritos",
+    "output": "pulsefx-architecture.html",
+    "quality_profile": "showcase",
+    "viewBox": [1650, 780],
+    "views": [
+      { "id": "leitura", "label": "Caminho de leitura (Dashboard/Detalhe)", "focus": ["web", "api", "domain", "db"], "note": "Usuário final nunca aciona BCB/FRED — API sempre lê Postgres já sincronizado." },
+      { "id": "sincronizacao", "label": "Sincronização agendada", "focus": ["bcb", "fred", "scheduler", "clients", "domain", "db"], "note": "Job agendado (ou endpoint admin) busca, normaliza e persiste com upsert idempotente." },
+      { "id": "favoritos", "label": "Favoritos (autenticado)", "focus": ["web", "clerk", "api", "db"], "note": "Único caminho do MVP que exige login — via Clerk." }
+    ]
+  },
+  "components": [
+    { "id": "bcb", "type": "external", "label": "BCB", "sublabel": "Olinda / SGS", "pos": [40, 40], "size": [150, 60] },
+    { "id": "fred", "type": "external", "label": "FRED", "sublabel": "St. Louis Fed API", "pos": [40, 220], "size": [150, 60] },
+    { "id": "clients", "type": "backend", "label": "Http Clients", "sublabel": "BcbClient · FredClient", "pos": [320, 130], "size": [190, 60] },
+    { "id": "scheduler", "type": "backend", "label": "Scheduler", "sublabel": "node-cron", "pos": [320, 320], "size": [190, 60] },
+    { "id": "domain", "type": "backend", "label": "Domínio + Aplicação", "sublabel": "Indicador · Sincronização · Favorito", "pos": [660, 130], "size": [220, 64] },
+    { "id": "db", "type": "database", "label": "PostgreSQL", "sublabel": "indicador, observacao, favorito, job", "pos": [1030, 130], "size": [270, 64] },
+    { "id": "api", "type": "backend", "label": "API HTTP", "sublabel": "Fastify — Interface", "pos": [660, 400], "size": [220, 64] },
+    { "id": "web", "type": "frontend", "label": "apps/web", "sublabel": "React + Vite", "pos": [1030, 400], "size": [170, 64] },
+    { "id": "user", "type": "external", "label": "Usuário", "sublabel": "Browser", "pos": [1330, 400], "size": [140, 64] },
+    { "id": "clerk", "type": "security", "label": "Clerk", "sublabel": "Auth (só Favoritos)", "pos": [660, 580], "size": [220, 60] }
+  ],
+  "boundaries": [
+    { "kind": "region", "label": "Fontes externas", "wraps": ["bcb", "fred"] },
+    { "kind": "region", "label": "apps/api — Fastify (Domain/Application/Infrastructure/Interface)", "wraps": ["clients", "scheduler", "domain", "api"] }
+  ],
+  "connections": [
+    { "id": "bcb-clients", "from": "bcb", "to": "clients", "label": "PTAX / SGS" },
+    { "id": "fred-clients", "from": "fred", "to": "clients", "label": "observations" },
+    { "id": "scheduler-clients", "from": "scheduler", "to": "clients", "label": "dispara", "variant": "dashed" },
+    { "id": "clients-domain", "from": "clients", "to": "domain", "label": "normaliza", "labelAt": [534, 126] },
+    { "id": "domain-db", "from": "domain", "to": "db", "label": "upsert", "variant": "emphasis" },
+    { "id": "api-domain", "from": "api", "to": "domain", "label": "usa (lê via repositório)" },
+    { "id": "api-clients-admin", "from": "api", "to": "clients", "label": "POST /admin/sync", "variant": "dashed" },
+    { "id": "web-api", "from": "web", "to": "api", "label": "GET · POST · DELETE", "variant": "emphasis", "labelAt": [1006, 396] },
+    { "id": "user-web", "from": "user", "to": "web", "label": "usa" },
+    { "id": "web-clerk", "from": "web", "to": "clerk", "label": "login", "variant": "security" },
+    { "id": "api-clerk", "from": "api", "to": "clerk", "label": "getAuth()", "variant": "security", "fromSide": "bottom", "toSide": "top", "labelAt": [770, 520] }
+  ],
+  "cards": [
+    { "dot": "cyan", "title": "Sincronização", "items": ["Job node-cron: fx-diária 1x/dia útil, macro-mensal 1x/dia", "Endpoint admin protegido força sync fora do ciclo", "Upsert por (indicador_id, data_referencia) — idempotente"] },
+    { "dot": "emerald", "title": "Leitura (Dashboard/Detalhe)", "items": ["API nunca chama BCB/FRED no caminho de leitura", "VariacaoService único, reaproveitado por Dashboard e Detalhe", "Web só fala com a API própria"] },
+    { "dot": "rose", "title": "Favoritos (autenticado)", "items": ["Único módulo com login — Clerk (clerkPlugin/getAuth)", "Persistência real por (user_id, indicador_id)", "Dashboard/Detalhe/Sincronização continuam públicos"] }
+  ]
+}
