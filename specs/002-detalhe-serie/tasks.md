@@ -82,7 +82,7 @@ ordenados cronologicamente.
 
 ### Tests for User Story 3
 
-- [ ] T015 [P] [US3] Teste de integração: mesma `dataReferencia`/indicador retorna `variacao`
+- [x] T015 [P] [US3] Teste de integração: mesma `dataReferencia`/indicador retorna `variacao`
       idêntica em `GET /indicadores` e `GET /indicadores/:id/serie`, em
       `apps/api/tests/integration/consistencia-variacao.test.ts`
 
