@@ -62,12 +62,12 @@ Postgres de teste e verificar que `Observacao` foi persistida para os 4 indicado
 
 ### Tests for User Story 2
 
-- [ ] T017 [P] [US2] Teste HTTP: 401 sem `X-Admin-Key`, 202 com chave correta, em `apps/api/tests/http/admin-sync.test.ts`
+- [x] T017 [P] [US2] Teste HTTP: 401 sem `X-Admin-Key`, 202 com chave correta, em `apps/api/tests/http/admin-sync.test.ts`
 
 ### Implementation for User Story 2
 
-- [ ] T018 [US2] Implementar rota `POST /admin/sync` em `apps/api/src/interface/http/routes/admin-sync.routes.ts` (usa T009, T013)
-- [ ] T019 [US2] Registrar rota em `apps/api/src/interface/http/server.ts`
+- [x] T018 [US2] Implementar rota `POST /admin/sync` em `apps/api/src/interface/http/routes/admin-sync.routes.ts` (usa T009, T013)
+- [x] T019 [US2] Registrar rota em `apps/api/src/interface/http/server.ts`
 
 **Checkpoint**: contingência manual funcional, sem substituir o job agendado.
 
