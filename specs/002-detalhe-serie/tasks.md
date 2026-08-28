@@ -92,7 +92,7 @@ ordenados cronologicamente.
 
 ## Phase 6: Polish
 
-- [ ] T016 Rodar `quickstart.md` manualmente, incluindo o cenário de histórico incompleto
+- [x] T016 Rodar `quickstart.md` manualmente, incluindo o cenário de histórico incompleto
       (`historicoCompleto: false`)
 
 ---
