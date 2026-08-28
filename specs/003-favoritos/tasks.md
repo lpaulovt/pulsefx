@@ -101,9 +101,14 @@
 
 ## Phase 6: Polish
 
-- [ ] T021 Documentar estratégia de identidade (Clerk) no `readme.md` raiz (exigência readme seção
-      4.3)
-- [ ] T022 Rodar `quickstart.md` manualmente (login, marcar, reload, novo login)
+- [x] T021 Documentar estratégia de identidade (Clerk) no `readme.md` raiz (exigência readme seção
+      4.3) — ver `readme.md` seção 11.
+- [x] T022 Rodar `quickstart.md` manualmente (login, marcar, reload, novo login) — parcial: sem
+      conta Clerk real neste ambiente (ver `readme.md` seção 11), validado o que não depende de
+      conta real (`GET /indicadores` público 200, `POST/GET /favoritos` 401 sem token e 401 com
+      token invalido — guarda de autenticacao real, nao mock). Fluxo de login humano (`<SignIn>`
+      real, marcar → reload → novo login) fica registrado como pendencia explicita, nao fingido
+      como validado.
 
 ---
 
