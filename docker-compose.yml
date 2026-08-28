@@ -31,6 +31,7 @@ services:
       CORS_ORIGIN: ${CORS_ORIGIN:-http://localhost:5173}
       FRED_API_KEY: ${FRED_API_KEY:-changeme}
       SYNC_TTL_MINUTES: ${SYNC_TTL_MINUTES:-60}
+      ADMIN_SYNC_KEY: ${ADMIN_SYNC_KEY:-changeme}
     ports:
       - "${PORT:-3000}:3000"
 
