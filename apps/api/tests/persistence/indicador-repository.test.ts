@@ -49,4 +49,33 @@ describe("PostgresIndicadorRepository", () => {
       { indicadorId: INDICADOR_ID, dataReferencia: DATAS[0], valor: 5.1 },
     ]);
   });
+
+  it("buscarSerie: retorna null para indicador fora do conjunto fechado do MVP (404)", async () => {
+    const resultado = await repository.buscarSerie("nao-existe", 30);
+
+    expect(resultado).toBeNull();
+  });
+
+  it("buscarSerie: respeita o limit e ordena cronologicamente (mais antiga primeiro)", async () => {
+    await pool.query(
+      `INSERT INTO observacao (indicador_id, data_referencia, valor) VALUES ($1, $2, 5.10), ($1, $3, 5.42)
+       ON CONFLICT (indicador_id, data_referencia) DO UPDATE SET valor = EXCLUDED.valor`,
+      [INDICADOR_ID, DATAS[0], DATAS[1]],
+    );
+
+    const resultado = await repository.buscarSerie(INDICADOR_ID, 1);
+
+    expect(resultado?.indicador.id).toBe(INDICADOR_ID);
+    // limit=1 so traz a mais recente das duas datas inseridas.
+    expect(resultado?.observacoes).toEqual([
+      { indicadorId: INDICADOR_ID, dataReferencia: DATAS[1], valor: 5.42 },
+    ]);
+  });
+
+  it("buscarSerie: limit 0 retorna indicador com lista vazia, nunca null", async () => {
+    const resultado = await repository.buscarSerie(INDICADOR_ID, 0);
+
+    expect(resultado?.indicador.id).toBe(INDICADOR_ID);
+    expect(resultado?.observacoes).toEqual([]);
+  });
 });
