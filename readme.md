@@ -176,5 +176,45 @@ duplica observação.
 
 ---
 
+## 11. Estratégia de identidade — Favoritos (implementação — `specs/003-favoritos`)
+
+Requisito da seção 4.3: persistência real de favorito no backend, vinculada a conta de usuário
+(não a sessão anônima/dispositivo), com estratégia de identidade documentada aqui.
+
+### Mecanismo
+
+- **Autenticação: Clerk.** Backend (`@clerk/fastify`, `clerkPlugin()` registrado globalmente em
+  `apps/api/src/interface/http/server.ts`) e frontend (`@clerk/clerk-react`, `<ClerkProvider>` em
+  `apps/web/src/main.tsx`, `<SignIn>`/`<SignUp>` na página `Login`, guarda de rota via
+  `<SignedIn>`/`<SignedOut>`). Único ponto do MVP com login — Dashboard, Detalhe e Sincronização
+  continuam públicos.
+- **Persistência real** (não é estratégia híbrida/local): tabela `favorito` no Postgres,
+  `unique (user_id, indicador_id)`, `apps/api/src/infrastructure/persistence/postgres/favorito-repository.ts`.
+  `user_id` é o `userId` do Clerk (`getAuth(request).userId` no backend, `useAuth()` no frontend) —
+  o domínio (`apps/api/src/domain/favorito`) nunca importa tipo do Clerk, só conhece `userId: string`.
+- **Env vars**: `CLERK_SECRET_KEY` (backend), `CLERK_PUBLISHABLE_KEY` (backend) e
+  `VITE_CLERK_PUBLISHABLE_KEY` (frontend — única chave que vai ao bundle; o segredo nunca sai do
+  backend). Decisão registrada em `specs/003-favoritos/research.md`.
+
+### Limitação conhecida — sem conta Clerk real neste ambiente
+
+Este repositório **não tem conta de desenvolvimento Clerk configurada**: as chaves em `.env` são
+placeholder (`sk_test_placeholder`/`pk_test_...`), só satisfazem o formato exigido pelo SDK e
+**não autenticam ninguém de verdade**.
+
+- Todos os testes automatizados (`apps/api/tests/http/favoritos.routes.test.ts`,
+  `apps/api/tests/integration/favoritos-persistencia.test.ts`,
+  `apps/web/tests/frontend/BotaoFavoritar.test.tsx`, `MeusIndicadores.test.tsx`, `App.test.tsx`)
+  mockam `getAuth`/`useAuth` — nunca instanciam o SDK real do Clerk nem chamam rede.
+- O passo de login real do `specs/003-favoritos/quickstart.md` (criar conta, `<SignIn>` real,
+  obter token de sessão via dashboard/Testing Tokens do Clerk) **não foi validado end-to-end**
+  neste ambiente, por falta de conta de desenvolvimento configurada — registrado aqui como
+  pendência explícita, não como validado.
+- Para validar em um ambiente com conta Clerk real: criar aplicação em
+  [clerk.com](https://clerk.com), preencher `CLERK_SECRET_KEY`/`CLERK_PUBLISHABLE_KEY`/
+  `VITE_CLERK_PUBLISHABLE_KEY` reais em `.env`, e seguir `specs/003-favoritos/quickstart.md`.
+
+---
+
 **Versão do briefing:** 1.9  
 **Última atualização:** 2026-06-10
