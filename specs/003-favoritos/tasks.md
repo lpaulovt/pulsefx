@@ -92,7 +92,7 @@
 
 ### Implementation for User Story 3
 
-- [ ] T020 [US3] Tratar `indicadores: []` em `MeusIndicadores.tsx` (T019) — mensagem orientando a
+- [x] T020 [US3] Tratar `indicadores: []` em `MeusIndicadores.tsx` (T019) — mensagem orientando a
       ir ao Dashboard, nunca tela em branco
 
 **Checkpoint**: todas as user stories funcionais.
