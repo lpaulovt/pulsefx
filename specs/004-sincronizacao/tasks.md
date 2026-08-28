@@ -82,11 +82,11 @@ permanece servido e `JobExecucao` registra a falha.
 
 ### Tests for User Story 3
 
-- [ ] T020 [P] [US3] Teste de integração: falha simulada do client externo mantém último dado válido, em `apps/api/tests/integration/sincronizacao-falha.test.ts`
+- [x] T020 [P] [US3] Teste de integração: falha simulada do client externo mantém último dado válido, em `apps/api/tests/integration/sincronizacao-falha.test.ts`
 
 ### Implementation for User Story 3
 
-- [ ] T021 [US3] Adicionar tratamento de erro + 1 retry com backoff curto no caso de uso `SincronizarIndicador` (T013), nunca propagando exceção não tratada para o scheduler/rota
+- [x] T021 [US3] Adicionar tratamento de erro + 1 retry com backoff curto no caso de uso `SincronizarIndicador` (T013), nunca propagando exceção não tratada para o scheduler/rota
 
 **Checkpoint**: todas as user stories da feature funcionais e testadas independentemente.
 
