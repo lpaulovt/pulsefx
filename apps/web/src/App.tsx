@@ -3,6 +3,7 @@ import { SignedIn, SignedOut } from "@clerk/clerk-react";
 import { Dashboard } from "./pages/Dashboard.js";
 import { DetalheSerie } from "./pages/DetalheSerie.js";
 import { Login } from "./pages/Login.js";
+import { MeusIndicadores } from "./pages/MeusIndicadores.js";
 
 const ROTA_MEUS_INDICADORES = "meus-indicadores";
 const ROTA_LOGIN = "login";
@@ -30,9 +31,7 @@ export function App() {
     return (
       <>
         <SignedIn>
-          {/* Pagina MeusIndicadores.tsx substitui este placeholder em US2 (T019) -
-              guarda de rota (FR-004) ja funcional antes da pagina existir. */}
-          <p>Carregando "Meus indicadores"...</p>
+          <MeusIndicadores />
         </SignedIn>
         <SignedOut>
           <Login />

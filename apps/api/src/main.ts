@@ -11,6 +11,7 @@ import { PostgresObservacaoRepository } from "./infrastructure/persistence/postg
 import { PostgresFavoritoRepository } from "./infrastructure/persistence/postgres/favorito-repository.js";
 import { MarcarFavorito } from "./application/favorito/marcar-favorito.js";
 import { DesmarcarFavorito } from "./application/favorito/desmarcar-favorito.js";
+import { ListarFavoritos } from "./application/favorito/listar-favoritos.js";
 import { registrarSyncJobs } from "./infrastructure/scheduler/sync-scheduler.js";
 
 async function main(): Promise<void> {
@@ -25,6 +26,7 @@ async function main(): Promise<void> {
   const favoritoRepository = new PostgresFavoritoRepository();
   const marcarFavorito = new MarcarFavorito(favoritoRepository);
   const desmarcarFavorito = new DesmarcarFavorito(favoritoRepository);
+  const listarFavoritos = new ListarFavoritos(obterDashboard, favoritoRepository);
 
   const app = await buildServer({
     sincronizarIndicador,
@@ -32,6 +34,7 @@ async function main(): Promise<void> {
     obterSerie,
     marcarFavorito,
     desmarcarFavorito,
+    listarFavoritos,
   });
   registrarSyncJobs(sincronizarIndicador);
 

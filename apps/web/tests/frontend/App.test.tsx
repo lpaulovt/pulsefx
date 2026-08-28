@@ -12,6 +12,9 @@ vi.mock("@clerk/clerk-react", () => ({
 vi.mock("../../src/pages/Dashboard.js", () => ({ Dashboard: () => <p>Dashboard page</p> }));
 vi.mock("../../src/pages/DetalheSerie.js", () => ({ DetalheSerie: () => <p>Detalhe page</p> }));
 vi.mock("../../src/pages/Login.js", () => ({ Login: () => <p>Login page</p> }));
+vi.mock("../../src/pages/MeusIndicadores.js", () => ({
+  MeusIndicadores: () => <p>Meus indicadores page</p>,
+}));
 
 const { App } = await import("../../src/App.js");
 
