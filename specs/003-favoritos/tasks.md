@@ -19,14 +19,14 @@
 
 ## Phase 2: Foundational
 
-- [ ] T004 Registrar `clerkPlugin()` em `apps/api/src/interface/http/server.ts` via novo
+- [x] T004 Registrar `clerkPlugin()` em `apps/api/src/interface/http/server.ts` via novo
       `apps/api/src/infrastructure/auth/clerk-plugin.ts`
-- [ ] T005 [P] Implementar `FavoritoRepository` (upsert/delete por `(user_id, indicador_id)`, list
+- [x] T005 [P] Implementar `FavoritoRepository` (upsert/delete por `(user_id, indicador_id)`, list
       por `user_id`) em `apps/api/src/infrastructure/persistence/postgres/favorito-repository.ts`
-- [ ] T006 [P] Envolver `apps/web/src/main.tsx` com `<ClerkProvider>`
-- [ ] T007 [US1] Implementar página `Login` com `<SignIn>`/`<SignUp>` do Clerk em
+- [x] T006 [P] Envolver `apps/web/src/main.tsx` com `<ClerkProvider>`
+- [x] T007 [US1] Implementar página `Login` com `<SignIn>`/`<SignUp>` do Clerk em
       `apps/web/src/pages/Login.tsx` (FR-004a — único ponto do MVP com autenticação)
-- [ ] T008 [US1] Implementar guarda de rota (`<SignedIn>`/`<SignedOut>` do Clerk) redirecionando
+- [x] T008 [US1] Implementar guarda de rota (`<SignedIn>`/`<SignedOut>` do Clerk) redirecionando
       para `Login` ao acessar `MeusIndicadores` sem sessão, em `apps/web/src/App.tsx`
 
 **Checkpoint**: infraestrutura de auth (backend + UI de login) pronta — user stories podem começar.
