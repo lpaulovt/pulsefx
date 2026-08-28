@@ -19,6 +19,7 @@
     "@pulsefx/shared-types": "*",
     "fastify": "^5.12.1",
     "@fastify/cors": "^11.3.0",
+    "node-cron": "^4.2.1",
     "pg": "^8.23.0",
     "zod": "^4.5.1"
   },
@@ -27,7 +28,7 @@
     "@types/pg": "^8.11.0",
     "node-pg-migrate": "^9.0.0",
     "tsx": "^4.23.12",
-    "typescript": "^7.0.2",
+    "typescript": "^6.0.3",
     "vitest": "^4.1.11"
   }
 }

@@ -9,4 +9,5 @@ export const env = {
   corsOrigin: process.env.CORS_ORIGIN ?? "http://localhost:5173",
   fredApiKey: process.env.FRED_API_KEY ?? "",
   syncTtlMinutes: Number(process.env.SYNC_TTL_MINUTES ?? 60),
+  adminSyncKey: process.env.ADMIN_SYNC_KEY ?? "",
 };
