@@ -67,9 +67,9 @@ ordenados cronologicamente.
 
 ### Implementation for User Story 2
 
-- [ ] T013 [P] [US2] Implementar `TextoLimitacoes` em
+- [x] T013 [P] [US2] Implementar `TextoLimitacoes` em
       `apps/web/src/components/TextoLimitacoes.tsx`
-- [ ] T014 [US2] Incluir `TextoLimitacoes` e `Disclaimer` (reaproveitado de
+- [x] T014 [US2] Incluir `TextoLimitacoes` e `Disclaimer` (reaproveitado de
       `specs/001-dashboard`) em `DetalheSerie.tsx` (T012)
 
 **Checkpoint**: guardrail de transparência coberto.
