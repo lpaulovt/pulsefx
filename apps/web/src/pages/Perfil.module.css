@@ -1,0 +1,15 @@
+.dados {
+  margin: 1.5rem 0;
+  display: grid;
+  gap: 1rem;
+}
+
+.dados dt {
+  font-size: 0.8125rem;
+  color: var(--ink-soft);
+}
+
+.dados dd {
+  margin: 0;
+  font-size: 1.0625rem;
+}
