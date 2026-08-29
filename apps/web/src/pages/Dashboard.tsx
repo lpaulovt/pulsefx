@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import { SignedIn, SignedOut, UserButton } from "@clerk/clerk-react";
 import { useDashboard } from "../hooks/use-dashboard.js";
+import { useFavoritos } from "../hooks/use-favoritos.js";
 import { IndicadorCard } from "../components/IndicadorCard.js";
 import { Disclaimer } from "../components/Disclaimer.js";
 import { appearanceClerk } from "../lib/clerk-appearance.js";
@@ -8,6 +9,13 @@ import styles from "./Dashboard.module.css";
 
 export function Dashboard() {
   const { indicadores, carregando, erro } = useDashboard();
+  // Sem sessao, useFavoritos() ja retorna lista vazia sem chamar a API (ver hook) -
+  // card sempre nasce "nao favoritado" pra visitante anonimo, correto.
+  const { indicadores: favoritos } = useFavoritos();
+  const favoritosIds = useMemo(
+    () => new Set(favoritos.map((item) => item.indicadorId)),
+    [favoritos],
+  );
   // useMemo: getComputedStyle nao muda entre re-renders (tokens.css e estatico),
   // sem sentido recalcular a cada troca de carregando/erro (code-review).
   const appearance = useMemo(() => appearanceClerk(), []);
@@ -61,7 +69,7 @@ export function Dashboard() {
       <div className="pf-grid">
         {indicadores.map((item) => (
           <a key={item.indicadorId} href={`#${item.indicadorId}`} className="pf-card-link">
-            <IndicadorCard item={item} />
+            <IndicadorCard item={item} favoritado={favoritosIds.has(item.indicadorId)} />
           </a>
         ))}
       </div>
