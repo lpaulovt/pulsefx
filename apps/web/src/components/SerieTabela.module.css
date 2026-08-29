@@ -1,0 +1,64 @@
+.wrapper {
+  overflow-x: auto;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  margin-top: 1rem;
+}
+
+.tabela {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.tabela th {
+  text-align: left;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--ink-soft);
+  padding: 0.625rem 1rem;
+  border-bottom: 1px solid var(--line);
+  white-space: nowrap;
+}
+
+.tabela td {
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid var(--line);
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.tabela tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.tabela tbody tr:nth-child(even) {
+  background: var(--paper);
+}
+
+.up {
+  color: var(--signal-up);
+}
+
+.down {
+  color: var(--signal-down);
+}
+
+.neutro {
+  color: var(--ink-soft);
+}
+
+/* Guardrail de design (issue #47): "indisponivel" sai do font-mono/tabular e vira
+   italico, para nunca ser lido como o mesmo tipo de dado que uma variacao real.
+   Especificidade "td.indisponivel" (0,2,1) precisa bater ".tabela td" (0,1,1),
+   senao o font-family mono vence e o guardrail vira so cosmetico (italico/cor). */
+.tabela td.indisponivel {
+  font-family: var(--font-body);
+  font-variant-numeric: normal;
+  font-style: italic;
+  color: var(--muted);
+}

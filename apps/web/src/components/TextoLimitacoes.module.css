@@ -1,0 +1,21 @@
+.secao {
+  margin-top: 1.5rem;
+  padding: 1rem 1.25rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+}
+
+.titulo {
+  font-size: 0.9375rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--ink-soft);
+}
+
+.texto {
+  margin: 0.5rem 0 0;
+  color: var(--ink-soft);
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}
