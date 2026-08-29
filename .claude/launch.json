@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "pulsefx-api",
+      "runtimeExecutable": "bash",
+      "runtimeArgs": ["-lc", "set -a && source .env && set +a && npm run dev:api"],
+      "port": 3000
+    },
+    {
+      "name": "pulsefx-web",
+      "runtimeExecutable": "bash",
+      "runtimeArgs": ["-lc", "set -a && source .env && set +a && npm run dev:web"],
+      "port": 5173
+    }
+  ]
+}

@@ -196,23 +196,44 @@ Requisito da seção 4.3: persistência real de favorito no backend, vinculada a
   `VITE_CLERK_PUBLISHABLE_KEY` (frontend — única chave que vai ao bundle; o segredo nunca sai do
   backend). Decisão registrada em `specs/003-favoritos/research.md`.
 
-### Limitação conhecida — sem conta Clerk real neste ambiente
+### Validação end-to-end com conta Clerk real (2026-08-28)
 
-Este repositório **não tem conta de desenvolvimento Clerk configurada**: as chaves em `.env` são
-placeholder (`sk_test_placeholder`/`pk_test_...`), só satisfazem o formato exigido pelo SDK e
-**não autenticam ninguém de verdade**.
+Testes automatizados (`apps/api/tests/http/favoritos.routes.test.ts`,
+`apps/api/tests/integration/favoritos-persistencia.test.ts`,
+`apps/web/tests/frontend/BotaoFavoritar.test.tsx`, `MeusIndicadores.test.tsx`, `App.test.tsx`)
+mockam `getAuth`/`useAuth` por design — não instanciam o SDK real do Clerk nem chamam rede, o que
+é o correto para testes unitários/integração determinísticos.
 
-- Todos os testes automatizados (`apps/api/tests/http/favoritos.routes.test.ts`,
-  `apps/api/tests/integration/favoritos-persistencia.test.ts`,
-  `apps/web/tests/frontend/BotaoFavoritar.test.tsx`, `MeusIndicadores.test.tsx`, `App.test.tsx`)
-  mockam `getAuth`/`useAuth` — nunca instanciam o SDK real do Clerk nem chamam rede.
-- O passo de login real do `specs/003-favoritos/quickstart.md` (criar conta, `<SignIn>` real,
-  obter token de sessão via dashboard/Testing Tokens do Clerk) **não foi validado end-to-end**
-  neste ambiente, por falta de conta de desenvolvimento configurada — registrado aqui como
-  pendência explícita, não como validado.
-- Para validar em um ambiente com conta Clerk real: criar aplicação em
-  [clerk.com](https://clerk.com), preencher `CLERK_SECRET_KEY`/`CLERK_PUBLISHABLE_KEY`/
-  `VITE_CLERK_PUBLISHABLE_KEY` reais em `.env`, e seguir `specs/003-favoritos/quickstart.md`.
+A validação end-to-end com conta Clerk real de desenvolvimento **foi executada e confirmada**:
+
+- Login via UI automatizada (browser scriptado) é bloqueado pelo Cloudflare Turnstile — proteção
+  anti-bot da própria Clerk contra automação, documentada oficialmente (ver `@clerk/testing`).
+  Não é um problema do Pulse FX; exige humano real ou `@clerk/testing`/Playwright para passar.
+- Contornado pelo método que a [documentação de testes da
+  Clerk](https://clerk.com/docs/guides/development/testing/overview#get-a-valid-session-token)
+  recomenda: usuário + sessão + token JWT reais criados via Backend API (chave secreta), sem
+  passar pelo Turnstile.
+- Resultado: `GET /favoritos` sem token → 401; `POST /favoritos/:id` com sessão real → 204;
+  `GET /favoritos` reflete o marcado; `DELETE` desmarca; e o critério central do FR-003 —
+  **sessão revogada (logout) → nova sessão (novo login) → favorito de outro indicador
+  persiste** — confirmado com dado real em Postgres, sem mock.
+- Passo a passo reproduzível em `specs/003-favoritos/quickstart.md` (seção "Validar API com
+  sessão real").
+
+---
+
+## 12. Como rodar localmente
+
+```bash
+git clone <este-repositório> && cd pulsefx
+cp .env.example .env
+npm install
+npm run dev
+```
+
+Um comando (`npm run dev`) sobe tudo: Postgres (Docker), migrations, API (`:3000`) e web
+(`:5173`) juntos. Pré-requisitos, stack completa, variáveis de ambiente, estrutura do monorepo e
+troubleshooting: **[docs/SETUP.md](docs/SETUP.md)**.
 
 ---
 
