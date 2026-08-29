@@ -9,6 +9,11 @@ export function Perfil() {
 
   return (
     <main className="pf-page">
+      <p>
+        <a href="#" className="pf-voltar">
+          &larr; Voltar ao Dashboard
+        </a>
+      </p>
       <h1>Perfil</h1>
       {user && (
         <dl className={styles.dados}>

@@ -7,6 +7,11 @@ export function MeusIndicadores() {
 
   return (
     <main className="pf-page">
+      <p>
+        <a href="#" className="pf-voltar">
+          &larr; Voltar ao Dashboard
+        </a>
+      </p>
       <h1>Meus indicadores</h1>
       <p>
         <a href="#perfil">Ver perfil</a>
