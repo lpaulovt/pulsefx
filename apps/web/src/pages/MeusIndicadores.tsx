@@ -8,6 +8,9 @@ export function MeusIndicadores() {
   return (
     <main className="pf-page">
       <h1>Meus indicadores</h1>
+      <p>
+        <a href="#perfil">Ver perfil</a>
+      </p>
       {carregando && <p className="pf-state">Carregando favoritos...</p>}
       {erro && (
         <p role="alert" className="pf-erro">
