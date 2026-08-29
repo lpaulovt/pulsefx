@@ -1,34 +1,56 @@
+import { useMemo } from "react";
+import { SignedIn, SignedOut, UserButton } from "@clerk/clerk-react";
 import { useDashboard } from "../hooks/use-dashboard.js";
 import { IndicadorCard } from "../components/IndicadorCard.js";
 import { Disclaimer } from "../components/Disclaimer.js";
+import { appearanceClerk } from "../lib/clerk-appearance.js";
 import styles from "./Dashboard.module.css";
 
 export function Dashboard() {
   const { indicadores, carregando, erro } = useDashboard();
+  // useMemo: getComputedStyle nao muda entre re-renders (tokens.css e estatico),
+  // sem sentido recalcular a cada troca de carregando/erro (code-review).
+  const appearance = useMemo(() => appearanceClerk(), []);
 
   return (
     <main className="pf-page">
-      <h1 className={styles.marca}>
-        {/* Assinatura visual (issue #47): traco de pulso ligado ao nome do produto,
-            desenhado uma vez no load - respeita prefers-reduced-motion via tokens.css. */}
-        <svg
-          className={styles.pulso}
-          width="28"
-          height="20"
-          viewBox="0 0 28 20"
-          fill="none"
-          aria-hidden="true"
-        >
-          <path
-            d="M0 10h6l2.5-7 4 14 3-10 2 3h10.5"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
+      <div className={styles.topo}>
+        <h1 className={styles.marca}>
+          {/* Assinatura visual (issue #47): traco de pulso ligado ao nome do produto,
+              desenhado uma vez no load - respeita prefers-reduced-motion via tokens.css. */}
+          <svg
+            className={styles.pulso}
+            width="28"
+            height="20"
+            viewBox="0 0 28 20"
+            fill="none"
+            aria-hidden="true"
+          >
+            <path
+              d="M0 10h6l2.5-7 4 14 3-10 2 3h10.5"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+          Pulse FX
+        </h1>
+        {/* issue #51: avatar (Manage account -> Perfil do Pulse FX, nao modal da Clerk)
+            ou link Entrar, dependendo da sessao. */}
+        <SignedIn>
+          <UserButton
+            appearance={appearance}
+            userProfileMode="navigation"
+            userProfileUrl="#perfil"
           />
-        </svg>
-        Pulse FX
-      </h1>
+        </SignedIn>
+        <SignedOut>
+          <a href="#login" className={styles.entrar}>
+            Entrar
+          </a>
+        </SignedOut>
+      </div>
       <Disclaimer />
       {carregando && <p className="pf-state">Carregando indicadores...</p>}
       {erro && (

@@ -1,8 +1,24 @@
+.topo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
 .marca {
   display: flex;
   align-items: center;
   gap: 0.625rem;
   font-size: 1.5rem;
+}
+
+.entrar {
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-sm);
+  background: var(--accent);
+  color: var(--surface);
+  text-decoration: none;
+  font-weight: 600;
 }
 
 .pulso {

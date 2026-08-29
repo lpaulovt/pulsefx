@@ -1,31 +1,17 @@
+import { useMemo, useState } from "react";
 import { SignIn, SignUp } from "@clerk/clerk-react";
+import { appearanceClerk } from "../lib/clerk-appearance.js";
 import styles from "./Login.module.css";
-
-// appearance (FR-001/T002): tokens do design system (issue #47). borderRadius/
-// fontFamily aceitam var() cru (Clerk so os repassa como CSS puro). Cores, porem,
-// passam por parser interno de cor (hex/rgb/hsl) para derivar hover/foco/contraste -
-// "var(--x)" cru nao casa com esse parser e o botao primario fica transparente
-// (confirmado em browser real). Por isso resolvemos a cor para valor literal via
-// getComputedStyle, chamado em render (depois que tokens.css ja foi aplicado).
-function corResolvida(variavelCss: string): string {
-  return getComputedStyle(document.documentElement).getPropertyValue(variavelCss).trim();
-}
 
 // Unico ponto de autenticacao do MVP (FR-004a) - SignIn/SignUp do Clerk cobrem
 // login e criacao de conta na mesma tela, sem formulario custom.
 // routing="virtual": o app ja usa window.location.hash como router proprio
 // (App.tsx) - "hash"/"path" do Clerk tomariam o hash da URL para os proprios
 // passos (verificacao, etc.) e colidiriam com esse roteamento.
+// Um formulario por vez (issue #51) - alternancia via estado local, sem rota nova.
 export function Login() {
-  const appearance = {
-    variables: {
-      colorPrimary: corResolvida("--accent"),
-      colorBackground: corResolvida("--surface"),
-      colorText: corResolvida("--ink"),
-      borderRadius: "var(--radius-sm)",
-      fontFamily: "var(--font-body)",
-    },
-  };
+  const [modo, setModo] = useState<"entrar" | "cadastrar">("entrar");
+  const appearance = useMemo(() => appearanceClerk(), []);
 
   return (
     <main className={styles.page}>
@@ -36,9 +22,23 @@ export function Login() {
       </p>
       <h1 className={styles.titulo}>Entrar para ver "Meus indicadores"</h1>
       <div className={styles.widgets}>
-        <SignIn routing="virtual" appearance={appearance} />
-        <SignUp routing="virtual" appearance={appearance} />
+        {modo === "entrar" ? (
+          <SignIn routing="virtual" appearance={appearance} />
+        ) : (
+          <SignUp routing="virtual" appearance={appearance} />
+        )}
       </div>
+      <p>
+        {modo === "entrar" ? (
+          <button type="button" className={styles.alternar} onClick={() => setModo("cadastrar")}>
+            Não tem conta? Cadastre-se
+          </button>
+        ) : (
+          <button type="button" className={styles.alternar} onClick={() => setModo("entrar")}>
+            Já tem conta? Entrar
+          </button>
+        )}
+      </p>
     </main>
   );
 }
