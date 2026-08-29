@@ -1,4 +1,5 @@
 import { SignIn, SignUp } from "@clerk/clerk-react";
+import styles from "./Login.module.css";
 
 // Unico ponto de autenticacao do MVP (FR-004a) - SignIn/SignUp do Clerk cobrem
 // login e criacao de conta na mesma tela, sem formulario custom.
@@ -7,13 +8,17 @@ import { SignIn, SignUp } from "@clerk/clerk-react";
 // passos (verificacao, etc.) e colidiriam com esse roteamento.
 export function Login() {
   return (
-    <main>
+    <main className={styles.page}>
       <p>
-        <a href="#">&larr; Voltar ao Dashboard</a>
+        <a href="#" className="pf-voltar">
+          &larr; Voltar ao Dashboard
+        </a>
       </p>
-      <h1>Entrar para ver "Meus indicadores"</h1>
-      <SignIn routing="virtual" />
-      <SignUp routing="virtual" />
+      <h1 className={styles.titulo}>Entrar para ver "Meus indicadores"</h1>
+      <div className={styles.widgets}>
+        <SignIn routing="virtual" />
+        <SignUp routing="virtual" />
+      </div>
     </main>
   );
 }

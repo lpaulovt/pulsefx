@@ -1,0 +1,16 @@
+.page {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 3rem;
+}
+
+.titulo {
+  font-size: 1.375rem;
+  margin-bottom: 1.5rem;
+}
+
+.widgets {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}

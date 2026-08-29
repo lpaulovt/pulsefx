@@ -1,0 +1,25 @@
+.botao {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.375rem 0.75rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  color: var(--ink-soft);
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.botao:disabled {
+  cursor: default;
+  opacity: 0.6;
+}
+
+.favoritado {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-soft);
+}

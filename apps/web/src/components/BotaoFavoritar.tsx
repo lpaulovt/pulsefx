@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useAuth } from "@clerk/clerk-react";
 import { desmarcarFavorito, marcarFavorito } from "../services/api-client.js";
+import styles from "./BotaoFavoritar.module.css";
 
 export interface BotaoFavoritarProps {
   indicadorId: string;
@@ -44,7 +45,13 @@ export function BotaoFavoritar({ indicadorId, favoritadoInicial = false }: Botao
   }
 
   return (
-    <button type="button" onClick={alternar} disabled={carregando} aria-pressed={favoritado}>
+    <button
+      type="button"
+      onClick={alternar}
+      disabled={carregando}
+      aria-pressed={favoritado}
+      className={`${styles.botao} ${favoritado ? styles.favoritado : ""}`}
+    >
       {favoritado ? "★ Favorito" : "☆ Favoritar"}
     </button>
   );

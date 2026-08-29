@@ -2,6 +2,7 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { ClerkProvider } from "@clerk/clerk-react";
 import { App } from "./App.js";
+import "./styles/tokens.css";
 
 // Unico ponto do MVP com login (specs/003-favoritos) - ClerkProvider so envolve a
 // arvore para a rota "Meus indicadores"/Login usarem <SignedIn>/<SignedOut>/useAuth;

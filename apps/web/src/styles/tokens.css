@@ -1,0 +1,128 @@
+/* Design system do Pulse FX (issue #47) - unico ponto de tokens globais, CSS Modules
+   por arquivo consomem estas variaveis em vez de duplicar valores.
+
+   Paleta pensada para dado financeiro: fundo "papel" claro (confianca/clareza, nao
+   dashboard escuro de terminal), --accent (cobalto) reservado para marca/interacao e
+   NUNCA usado para variacao - --signal-up/--signal-down sao as unicas cores de
+   alta/baixa, para nao colidir com o significado do dado. */
+:root {
+  --ink: #10182b; /* texto principal */
+  --ink-soft: #4a5268; /* texto secundario */
+  --paper: #f5f6f8; /* fundo da pagina */
+  --surface: #ffffff; /* fundo de card/tabela */
+  --line: #dde1e8; /* bordas e divisores */
+  --accent: #2c5ce0; /* marca/interacao - links, foco, favorito */
+  --accent-soft: #e8edfc; /* tint de --accent (disclaimer, hover) */
+  --signal-up: #0f7b4e; /* variacao positiva */
+  --signal-up-soft: #e3f3ea;
+  --signal-down: #b3261e; /* variacao negativa */
+  --signal-down-soft: #fbe9e7;
+  --muted: #6b7280; /* indisponivel / texto desabilitado */
+  --muted-soft: #eceef1;
+
+  --font-display: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --font-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --shadow-card: 0 1px 2px rgba(16, 24, 43, 0.06), 0 1px 1px rgba(16, 24, 43, 0.04);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  margin: 0;
+}
+
+a {
+  color: var(--accent);
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+/* Classes de layout compartilhadas entre paginas (issue #47) - globais (nao CSS
+   Module) de proposito: Dashboard/DetalheSerie/MeusIndicadores repetiam o mesmo
+   container/estado/erro/grid ate o code-review apontar a duplicacao; centralizar
+   aqui evita 3 arquivos ficarem fora de sincronia. Login nao usa .pf-page (largura
+   de formulario e intencionalmente diferente, ver Login.module.css). */
+.pf-page {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 3rem;
+}
+
+.pf-state {
+  margin: 1rem 0;
+  color: var(--ink-soft);
+}
+
+.pf-erro {
+  margin: 1rem 0;
+  padding: 0.75rem 1rem;
+  background: var(--signal-down-soft);
+  border: 1px solid var(--signal-down);
+  border-radius: var(--radius-sm);
+  color: var(--signal-down);
+}
+
+.pf-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1rem;
+  margin-top: 1.25rem;
+}
+
+.pf-card-link {
+  color: inherit;
+  text-decoration: none;
+  display: block;
+}
+
+.pf-voltar {
+  display: inline-block;
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
+  text-decoration: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

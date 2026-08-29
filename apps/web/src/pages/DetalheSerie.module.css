@@ -1,0 +1,14 @@
+.titulo {
+  font-family: var(--font-mono);
+  font-size: 1.75rem;
+  text-transform: uppercase;
+}
+
+.parcial {
+  margin: 1rem 0;
+  padding: 0.625rem 1rem;
+  background: var(--muted-soft);
+  border-radius: var(--radius-sm);
+  color: var(--ink-soft);
+  font-size: 0.875rem;
+}
