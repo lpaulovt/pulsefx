@@ -1,5 +1,8 @@
 # **Pulse FX**
 
+> 📄 **[Ver apresentação do projeto](docs/APRESENTACAO.html)** — visão geral, arquitetura e
+> fluxo do produto com screenshots reais. Ponto de entrada recomendado antes deste README.
+
 ## 1. Contexto
 
 Construir um **MVP** chamado **Pulse FX**: aplicação para acompanhar **câmbio (BRL)** e **indicadores macro** a partir de **fontes públicas**, com dados **persistidos**, **API própria** e cliente **web** de qualidade próxima à produção. O objetivo é avaliar **domínio de produto**, **engenharia backend e frontend**, **dados**, **testes** e **reprodutibilidade** da solução (incluindo **containerização** conforme a tabela abaixo).

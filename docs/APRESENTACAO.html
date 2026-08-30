@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Pulse FX — Apresentação do projeto</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --ink: #10182b;
+    --ink-soft: #4a5268;
+    --paper: #f5f6f8;
+    --surface: #ffffff;
+    --line: #dde1e8;
+    --accent: #2c5ce0;
+    --accent-soft: #e8edfc;
+    --signal-up: #0f7b4e;
+    --signal-up-soft: #e3f3ea;
+    --muted: #6b7280;
+    --muted-soft: #eceef1;
+    --font-display: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+    --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 16px;
+    --shadow-card: 0 1px 2px rgba(16, 24, 43, 0.06), 0 1px 1px rgba(16, 24, 43, 0.04);
+    --shadow-lift: 0 12px 32px rgba(16, 24, 43, 0.10), 0 2px 8px rgba(16, 24, 43, 0.06);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-display);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 64px 24px 96px;
+  }
+
+  header.hero {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 8px;
+  }
+
+  .pulso {
+    color: var(--accent);
+    flex-shrink: 0;
+  }
+
+  h1.wordmark {
+    font-size: 28px;
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+
+  .tagline {
+    font-size: 17px;
+    color: var(--ink-soft);
+    margin: 4px 0 40px;
+    max-width: 60ch;
+  }
+
+  .lead {
+    font-size: 16px;
+    color: var(--ink);
+    max-width: 68ch;
+  }
+  .lead + .lead { margin-top: 14px; }
+
+  .badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 24px 0 8px;
+  }
+  .badge {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ink-soft);
+    background: var(--muted-soft);
+    border-radius: 999px;
+    padding: 5px 12px;
+    letter-spacing: 0.01em;
+  }
+
+  section { margin-top: 56px; }
+
+  h2.section-title {
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin: 0 0 16px;
+  }
+
+  .card-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-card);
+    padding: 20px 24px;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+  }
+  .card-link:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-lift);
+    border-color: var(--accent);
+  }
+  .card-link .titulo {
+    font-weight: 600;
+    font-size: 16px;
+    margin: 0 0 4px;
+  }
+  .card-link .desc {
+    font-size: 14px;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+  .card-link .seta {
+    font-size: 20px;
+    color: var(--accent);
+    flex-shrink: 0;
+  }
+
+  .flow {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .step {
+    display: grid;
+    grid-template-columns: 32px 1fr;
+    gap: 16px;
+  }
+
+  .step .num {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .step .conteudo h3 {
+    font-size: 17px;
+    margin: 4px 0 4px;
+  }
+
+  .step .conteudo p {
+    font-size: 14.5px;
+    color: var(--ink-soft);
+    margin: 0 0 14px;
+    max-width: 62ch;
+  }
+
+  .step img {
+    width: 100%;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow-card);
+    display: block;
+  }
+
+  .tag-stack {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--accent);
+    background: var(--accent-soft);
+    border-radius: 4px;
+    padding: 2px 8px;
+    margin-bottom: 8px;
+  }
+
+  .setup-callout {
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .setup-callout h2 {
+    font-size: 20px;
+    margin: 0;
+    color: #fff;
+  }
+  .setup-callout p {
+    font-size: 14.5px;
+    color: #c7cde0;
+    margin: 0 0 8px;
+    max-width: 58ch;
+  }
+  .setup-callout code {
+    font-family: var(--font-mono);
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.14);
+    border-radius: var(--radius-sm);
+    padding: 12px 16px;
+    font-size: 13.5px;
+    color: #dbe2f5;
+    display: block;
+    width: fit-content;
+    margin: 8px 0 4px;
+  }
+  .setup-callout a {
+    color: #fff;
+    font-weight: 600;
+    font-size: 14.5px;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  footer {
+    margin-top: 72px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    font-size: 13px;
+    color: var(--muted);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  footer a { color: var(--ink-soft); }
+
+  @media (max-width: 560px) {
+    .wrap { padding: 40px 16px 64px; }
+    .step { grid-template-columns: 24px 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <svg class="pulso" width="30" height="22" viewBox="0 0 28 20" fill="none" aria-hidden="true">
+      <path d="M0 10h6l2.5-7 4 14 3-10 2 3h10.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <h1 class="wordmark">Pulse FX</h1>
+  </header>
+  <p class="tagline">MVP de acompanhamento de câmbio (USD/BRL) e indicadores macro, com dados persistidos, API própria e cliente web — construído como avaliação técnica de produto, engenharia e reprodutibilidade.</p>
+
+  <p class="lead">Pulse FX sincroniza câmbio e indicadores macroeconômicos a partir de fontes públicas — <strong>Banco Central do Brasil</strong> (PTAX, Meta Selic, IPCA) e <strong>FRED</strong> (Federal Funds Effective Rate) — persiste em PostgreSQL e expõe tudo por uma API própria consumida por um cliente web em React.</p>
+  <p class="lead">O MVP cobre dashboard de indicadores, detalhe histórico por série, sincronização agendada sem chamada direta às fontes externas no caminho de leitura, favoritos com persistência real por conta de usuário (Clerk), e uma tela de perfil.</p>
+
+  <div class="badges">
+    <span class="badge">Node.js + TypeScript</span>
+    <span class="badge">React 19 + Vite</span>
+    <span class="badge">Fastify</span>
+    <span class="badge">PostgreSQL</span>
+    <span class="badge">Docker Compose</span>
+    <span class="badge">Clerk (auth)</span>
+    <span class="badge">Vitest</span>
+  </div>
+
+  <section>
+    <h2 class="section-title">Arquitetura</h2>
+    <a class="card-link" href="architecture/pulsefx-architecture.html">
+      <div>
+        <p class="titulo">Diagrama de arquitetura interativo</p>
+        <p class="desc">Módulos, camadas (Domain/Application/Infrastructure/Interface) e fluxo de dado — sincronização → indicadores → API → web.</p>
+      </div>
+      <span class="seta">→</span>
+    </a>
+  </section>
+
+  <section>
+    <h2 class="section-title">Fluxo do produto</h2>
+    <div class="flow">
+
+      <div class="step">
+        <div class="num">1</div>
+        <div class="conteudo">
+          <span class="tag-stack">público · sem login</span>
+          <h3>Dashboard</h3>
+          <p>Card por indicador do conjunto fechado (USD/BRL PTAX, Meta Selic, IPCA, Federal Funds Effective Rate) — nome, último valor, data de referência e variação, com o disclaimer educacional sempre visível. Nunca chama BCB/FRED diretamente: lê só o que já foi sincronizado.</p>
+          <img src="images/01-home.png" alt="Dashboard do Pulse FX com os 4 indicadores e disclaimer" />
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="num">2</div>
+        <div class="conteudo">
+          <span class="tag-stack">Clerk · aparência customizada</span>
+          <h3>Login / cadastro</h3>
+          <p>Único ponto do MVP com autenticação — necessário para favoritar indicadores e ver o perfil. Tema do formulário customizado com a paleta e tipografia do próprio Pulse FX em vez do padrão genérico da Clerk.</p>
+          <img src="images/02-login.png" alt="Tela de login do Pulse FX com formulário da Clerk customizado" />
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="num">3</div>
+        <div class="conteudo">
+          <span class="tag-stack">autenticado</span>
+          <h3>Perfil</h3>
+          <p>Nome, e-mail e data de criação da conta, lidos direto da sessão Clerk — sem réplica de dado de conta no Postgres do Pulse FX.</p>
+          <img src="images/03-profile.png" alt="Tela de perfil com nome, e-mail e data de criação da conta" />
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="num">4</div>
+        <div class="conteudo">
+          <span class="tag-stack">autenticado · persistência real</span>
+          <h3>Meus indicadores (favoritos)</h3>
+          <p>Marcar/desmarcar favorito com persistência real no backend, vinculada à conta — sobrevive a reload e a login em outro dispositivo. Mesmo formato de card do Dashboard, mesma regra de variação.</p>
+          <img src="images/04-meus indicadores.png" alt="Tela Meus indicadores com os 4 indicadores marcados como favoritos" />
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="num">5</div>
+        <div class="conteudo">
+          <span class="tag-stack">público · histórico</span>
+          <h3>Detalhe da série</h3>
+          <p>Histórico do indicador (janela por tipo de série), texto de limitações dos dados sempre visível — fonte, defasagem de sincronização, possibilidade de revisão pela fonte, sem interpolação de lacuna. Mesma variação exibida no Dashboard, para a mesma data de referência.</p>
+          <img src="images/05-detalhes indicacor USD-BRL-PTAX.png" alt="Detalhe do indicador USD/BRL PTAX com histórico e limitações dos dados" />
+          <img src="images/05-detalhes indicador IPCA.png" alt="Detalhe do indicador IPCA com histórico e limitações dos dados" style="margin-top:12px" />
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <div class="setup-callout">
+      <h2>Rodar o projeto localmente</h2>
+      <p>Um comando sobe tudo: Postgres (Docker), migrations, API e web juntos. Pré-requisitos, stack completa, variáveis de ambiente e troubleshooting estão no guia de setup.</p>
+      <code>git clone &lt;repo&gt; &amp;&amp; cd pulsefx &amp;&amp; cp .env.example .env &amp;&amp; npm install &amp;&amp; npm run dev</code>
+      <a href="SETUP.md">Ver guia completo de setup →</a>
+    </div>
+  </section>
+
+  <footer>
+    <span>Pulse FX — MVP de avaliação técnica</span>
+    <span><a href="../readme.md">Briefing (readme.md)</a> · <a href="product/">Documentação de produto</a> · <a href="../specs/">Specs por feature</a></span>
+  </footer>
+
+</div>
+</body>
+</html>
