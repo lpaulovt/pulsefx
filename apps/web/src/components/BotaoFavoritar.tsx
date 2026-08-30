@@ -7,11 +7,21 @@ export interface BotaoFavoritarProps {
   indicadorId: string;
   /** Estado inicial - fonte de verdade real e o backend (GET /favoritos, US2). */
   favoritadoInicial?: boolean;
+  /**
+   * Avisa o pai quando o estado muda (otimista, mesmo timing do proprio botao - inclusive
+   * a reversao em falha). Usado por MeusIndicadores pra remover o card da lista assim que
+   * desfavoritar, sem esperar reload (essa tela so faz sentido mostrar favoritos).
+   */
+  onFavoritoAlterado?: (favoritado: boolean) => void;
 }
 
 // FR-001/FR-002: marcar/desmarcar com efeito imediato (estado otimista). FR-004: exige
 // sessao Clerk - sem login, direciona para a tela de Login em vez de chamar a API.
-export function BotaoFavoritar({ indicadorId, favoritadoInicial = false }: BotaoFavoritarProps) {
+export function BotaoFavoritar({
+  indicadorId,
+  favoritadoInicial = false,
+  onFavoritoAlterado,
+}: BotaoFavoritarProps) {
   const { isSignedIn, getToken } = useAuth();
   const [favoritado, setFavoritado] = useState(favoritadoInicial);
   const [carregando, setCarregando] = useState(false);
@@ -38,6 +48,7 @@ export function BotaoFavoritar({ indicadorId, favoritadoInicial = false }: Botao
 
     const proximoEstado = !favoritado;
     setFavoritado(proximoEstado);
+    onFavoritoAlterado?.(proximoEstado);
     setCarregando(true);
     try {
       const token = await getToken();
@@ -48,6 +59,7 @@ export function BotaoFavoritar({ indicadorId, favoritadoInicial = false }: Botao
       }
     } catch {
       setFavoritado(!proximoEstado); // reverte o otimismo em falha (FR-003 e sobre backend, nao UI)
+      onFavoritoAlterado?.(!proximoEstado);
     } finally {
       setCarregando(false);
     }

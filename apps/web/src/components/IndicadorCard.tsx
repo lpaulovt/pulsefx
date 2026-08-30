@@ -8,6 +8,8 @@ export interface IndicadorCardProps {
   item: DashboardItem;
   /** true em telas que ja filtram por favorito (MeusIndicadores, US2) - estrela inicia marcada. */
   favoritado?: boolean;
+  /** Repassado ao BotaoFavoritar - ver BotaoFavoritarProps. */
+  onFavoritoAlterado?: (favoritado: boolean) => void;
 }
 
 const CLASSE_CARD: Record<string, string | undefined> = {
@@ -24,7 +26,7 @@ const CLASSE_VARIACAO: Record<string, string | undefined> = {
   indisponivel: styles.variacaoIndisponivel,
 };
 
-export function IndicadorCard({ item, favoritado = false }: IndicadorCardProps) {
+export function IndicadorCard({ item, favoritado = false, onFavoritoAlterado }: IndicadorCardProps) {
   const estilo = classificarVariacao(item.variacao);
 
   return (
@@ -37,7 +39,11 @@ export function IndicadorCard({ item, favoritado = false }: IndicadorCardProps) 
           <h2 className={styles.nome}>{item.nome}</h2>
           <span className={styles.tipo}>{item.tipoSerie === "fx-diaria" ? "Diario" : "Mensal"}</span>
         </div>
-        <BotaoFavoritar indicadorId={item.indicadorId} favoritadoInicial={favoritado} />
+        <BotaoFavoritar
+          indicadorId={item.indicadorId}
+          favoritadoInicial={favoritado}
+          {...(onFavoritoAlterado ? { onFavoritoAlterado } : {})}
+        />
       </header>
       {item.ultimoValor !== null && item.dataReferencia !== null ? (
         <>

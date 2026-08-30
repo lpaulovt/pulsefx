@@ -3,10 +3,11 @@ import { cleanup, render, screen } from "@testing-library/react";
 import type { DashboardResponse } from "@pulsefx/shared-types";
 
 const getFavoritosMock = vi.fn();
+const desmarcarFavoritoMock = vi.fn().mockResolvedValue(undefined);
 vi.mock("../../src/services/api-client.js", () => ({
   getFavoritos: (...args: unknown[]) => getFavoritosMock(...args),
   marcarFavorito: vi.fn(),
-  desmarcarFavorito: vi.fn(),
+  desmarcarFavorito: (...args: unknown[]) => desmarcarFavoritoMock(...args),
 }));
 
 vi.mock("@clerk/clerk-react", () => ({
@@ -40,5 +41,19 @@ describe("MeusIndicadores (US2/US3, FR-005/FR-006)", () => {
 
     expect(await screen.findByText(/ainda não marcou nenhum indicador/i)).toBeTruthy();
     expect(screen.getByRole("link", { name: "Dashboard" })).toBeTruthy();
+  });
+
+  it("desfavoritar remove o card da lista na hora, sem esperar reload", async () => {
+    getFavoritosMock.mockResolvedValue({ indicadores: [FAVORITO] } satisfies DashboardResponse);
+    render(<MeusIndicadores />);
+
+    expect(await screen.findByText("USD/BRL (PTAX venda)")).toBeTruthy();
+    screen.getByRole("button", { name: /favorito/i }).click();
+
+    await vi.waitFor(() =>
+      expect(desmarcarFavoritoMock).toHaveBeenCalledWith("usd-brl-ptax", "token-fake"),
+    );
+    expect(screen.queryByText("USD/BRL (PTAX venda)")).toBeNull();
+    expect(await screen.findByText(/ainda não marcou nenhum indicador/i)).toBeTruthy();
   });
 });
