@@ -13,7 +13,7 @@ A banca considera **também aspectos implícitos** — **não apenas** se o MVP 
 
 ---
 
-## 2. Stack obrigatória e alinhamento à vaga
+## 2. Stack 
 
 | Área | Requisito |
 |------|-----------|

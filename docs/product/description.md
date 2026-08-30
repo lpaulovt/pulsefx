@@ -6,11 +6,11 @@ Construir um **MVP** chamado **Pulse FX**: aplicação para acompanhar **câmbio
 
 ### Avaliação: resultado final e sinais de engenharia
 
-A banca considera **também aspectos implícitos** — **não apenas** se o MVP funciona no estado final da entrega. Podem influenciar o julgamento, entre outros: **estrutura e organização do código**, **sequência e qualidade das mensagens de commit**, **arquitetura e modularização**, **organização do repositório** (com **preferência por monorepo**: um único repositório Git reunindo frontend web, backend e artefatos compartilhados; outro formato **só** se **justificado** no README), **pastas e limites entre pacotes/serviços**, **documentação útil** e **demais práticas** de engenharia de software perceptíveis no histórico e no código. Critérios de peso detalhados são **internos** ao processo seletivo.
+A  considera **também aspectos implícitos** — **não apenas** se o MVP funciona no estado final da entrega. Podem influenciar o julgamento, entre outros: **estrutura e organização do código**, **sequência e qualidade das mensagens de commit**, **arquitetura e modularização**, **organização do repositório** (com **preferência por monorepo**: um único repositório Git reunindo frontend web, backend e artefatos compartilhados; outro formato **só** se **justificado** no README), **pastas e limites entre pacotes/serviços**, **documentação útil** e **demais práticas** de engenharia de software perceptíveis no histórico e no código. Critérios de peso detalhados são **internos** ao processo seletivo.
 
 ---
 
-## 2. Stack obrigatória e alinhamento à vaga
+## 2. Stack
 
 | Área | Requisito |
 |------|-----------|
