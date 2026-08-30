@@ -62,4 +62,17 @@ describe("BotaoFavoritar (T013, FR-001/FR-002/FR-004)", () => {
 
     expect(screen.getByRole("button", { pressed: false })).toBeTruthy();
   });
+
+  it("reflete favoritadoInicial quando a prop muda depois da montagem (GET /favoritos do Dashboard chega depois de GET /indicadores)", () => {
+    const { rerender } = render(
+      <BotaoFavoritar indicadorId="usd-brl-ptax" favoritadoInicial={false} />,
+    );
+    expect(screen.getByRole("button", { pressed: false })).toBeTruthy();
+
+    // Simula o Dashboard re-renderizando com o dado real de favoritos, chegado depois
+    // (mesmo componente, prop muda - useState(favoritadoInicial) sozinho ignoraria isso).
+    rerender(<BotaoFavoritar indicadorId="usd-brl-ptax" favoritadoInicial={true} />);
+
+    expect(screen.getByRole("button", { pressed: true })).toBeTruthy();
+  });
 });

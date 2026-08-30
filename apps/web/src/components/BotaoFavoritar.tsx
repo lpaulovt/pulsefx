@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "@clerk/clerk-react";
 import { desmarcarFavorito, marcarFavorito } from "../services/api-client.js";
 import styles from "./BotaoFavoritar.module.css";
@@ -15,6 +15,15 @@ export function BotaoFavoritar({ indicadorId, favoritadoInicial = false }: Botao
   const { isSignedIn, getToken } = useAuth();
   const [favoritado, setFavoritado] = useState(favoritadoInicial);
   const [carregando, setCarregando] = useState(false);
+
+  // No Dashboard, GET /indicadores (publico) e GET /favoritos (autenticado) sao dois
+  // fetches independentes - nao ha garantia de qual responde primeiro. Se o card monta
+  // antes de favoritos carregar, "favoritadoInicial" nasce false e o useState so captura
+  // esse valor na montagem (React ignora o argumento inicial em renders seguintes) - sem
+  // este efeito, o card nunca reflete o favorito real quando favoritos chega depois.
+  useEffect(() => {
+    setFavoritado(favoritadoInicial);
+  }, [favoritadoInicial]);
 
   async function alternar(event: React.MouseEvent): Promise<void> {
     // IndicadorCard costuma estar dentro de um <a> (navegacao ao Detalhe) - o clique no
